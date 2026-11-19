@@ -79,10 +79,11 @@ def homepage():
     services = ''.join([card('photovoltaik/eigenverbrauch/index.html','Photovoltaik','Solarstrom erzeugen und passend zum eigenen Verbrauch nutzen.'),card('speicher/eigenverbrauch/index.html','Stromspeicher','Tagsüber erzeugten Solarstrom für später speichern.'),card('service/index.html','Anlagenservice','Erträge im Blick behalten und bestehende Technik weiterentwickeln.')])
     audience = ''.join([card('photovoltaik/eigenverbrauch/index.html','Für Privathaushalte','Planen Sie Solarstrom für Ihr Zuhause.',('ecosteps_640x385-teaser_home-4.jpg','Zwei Menschen genießen die Sonne')),card('gewerbekunden/eigenverbrauch/index.html','Für Unternehmen','Richten Sie die Anlage an Betriebszeiten und Verbrauch aus.',('ecosteps_640x385-teaser_home-gewerbe.jpg','Solarmodule auf Gewerbedächern'))])
     guide = f'<section class="highlight"><div class="wrap"><p class="eyebrow">Energieratgeber</p><h2>Wie viel Solarstrom können Sie selbst nutzen?</h2><p>Erfahren Sie, wie Eigenverbrauch, Speicher und Anlagengröße zusammenspielen.</p>{link("energieratgeber/index.html","Zum Energieratgeber ↗","button primary")}</div></section>' if articles else ''
-    return hero+f'<section class="section wrap"><p class="eyebrow">Unsere Leistungen</p><h2>Technik, die zu Ihrem Verbrauch passt.</h2><div class="cards">{services}</div></section><section class="section light"><div class="wrap"><h2>Solarstrom für Zuhause und Betrieb</h2><div class="cards two">{audience}</div></div></section>'+guide+f'<section class="section wrap"><p class="eyebrow">Erfahrung mit Photovoltaik</p><h2>Fast 1.000 Anlagen von 2008 bis 2015</h2><p>EcoSteps nennt für diesen Zeitraum fast 1.000 gebaute Photovoltaikanlagen.</p>{link("bestand/startseite/index.html","Meldungen und Angebote der bisherigen Startseite ↗","text-link")}</section>'
+    references = card('referenzen/index.html','PV-Anlage auf einer Kfz-Werkstatt','Das Bestandsbeispiel zeigt 54,2 kWp Anlagenleistung und einen solaren Deckungsanteil von 60,7 %.',('werkstatt.jpg','Arbeit in einer Kfz-Werkstatt, Motiv der Bestandsseite'))
+    return hero+f'<section class="section wrap"><p class="eyebrow">Unsere Leistungen</p><h2>Technik, die zu Ihrem Verbrauch passt.</h2><div class="cards">{services}</div></section><section class="section light"><div class="wrap"><h2>Solarstrom für Zuhause und Betrieb</h2><div class="cards two">{audience}</div></div></section>'+guide+f'<section class="section wrap"><p class="eyebrow">Erfahrung mit Photovoltaik</p><h2>Fast 1.000 Anlagen von 2008 bis 2015</h2><div class="cards two">{references}</div><p class="archive-link">{link("bestand/startseite/index.html","Meldungen und Angebote der bisherigen Startseite ↗","text-link")}</p></section>'
 
 categories = {'photovoltaik':'Photovoltaik','speicher':'Stromspeicher','heizung':'Heizung','gewerbekunden':'Für Unternehmen','beratung':'Energieberatung'}
-paths = set(pages) | {'leistungen','bestand/startseite'}
+paths = set(pages) | {'leistungen','bestand/startseite','referenzen'}
 if articles:
     paths |= {'energieratgeber',*articles}
 if (ROOT / 'content/cookies.html').exists():
@@ -95,11 +96,16 @@ for category, label in categories.items():
     entries = [(k,p) for k,p in pages.items() if k.startswith(category+'/')]
     if entries:
         sections += f'<h2>{label}</h2><ul>'+''.join(f'<li>{link(k+"/index.html",escape(p["title"].split(" - ")[-1]))}</li>' for k,p in entries)+'</ul>'
+layout('referenzen','Referenzen',intro('Referenzen','Beispiele aus der bisherigen EcoSteps-Website.')+'<section class="section wrap cards two">'+card('gewerbekunden/eigenverbrauch/index.html','Kfz-Werkstatt','Historisches Anlagenbeispiel mit Leistungsprofil und Jahreswerten.',('werkstatt.jpg','Arbeit in einer Kfz-Werkstatt, Motiv der Bestandsseite'))+card('photovoltaik/eigenverbrauch/index.html#4','Kundenanlagen','Historische Beispiele für Eigenverbrauch in Privathaushalten.')+'</section>')
 layout('leistungen','Leistungen',intro('Unsere Leistungen','Photovoltaik, Speicher, Wärme und Anlagenservice.')+f'<section class="section wrap prose">{sections}<h2>Anlagenservice</h2>{link("service/index.html","Zum Anlagenservice ↗","text-link")}</section>')
 for key,p in pages.items():
     if not key: continue
     title = escape(p['title'])
     body = intro(title,'','Bestandsinhalte')+f'<section class="section wrap prose">{legacy(key)}</section>'
+    if key.startswith(('photovoltaik/','speicher/','heizung/','gewerbekunden/','beratung/')):
+        body = body.replace('<div class="archive">','<p class="notice">Bestandsinhalt. Angaben zu Preisen, Produkten, Vergütung und Förderung können zeitgebunden sein.</p><div class="archive">',1)
+    if key == 'gewerbekunden/eigenverbrauch':
+        body = body.replace('<div class="archive">','<p class="notice">Die historische Beispielrechnung enthält abweichende Werte: 12.772 kWh Netzbezug zu 0,22 €/kWh ergeben etwa 2.810 € im Jahr. In der Originaltabelle stehen 825 €.</p><div class="archive">',1)
     if key == 'kontakt':
         body = intro('Kontakt','Schreiben Sie uns eine Nachricht oder rufen Sie uns an.')+f'<section class="section wrap prose">{contact()}<p>{link("beratung/index.html",cta,"button primary")}</p></section>'
     if key == 'beratung' and (ROOT/'content/consultation.html').exists():
