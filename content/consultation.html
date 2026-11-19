@@ -1,5 +1,4 @@
 <div class="form-card">
-  <h2>Ihre Anfrage</h2>
   <p class="notice"><strong>Offline-Demo.</strong> Angaben bleiben in diesem Fenster. Es wird keine Anfrage übertragen.</p>
   <form id="request-form">
     <fieldset><legend>Ich frage an für</legend>
@@ -7,21 +6,14 @@
       <label class="choice"><input type="radio" name="audience" value="business" required> Unternehmen</label>
     </fieldset>
     <div class="fields">
-      <label>Name<input autocomplete="name" name="name" required></label>
+      <label>Name<input autocomplete="name" name="name" maxlength="100" required></label>
       <label>E-Mail-Adresse<input type="email" autocomplete="email" name="email" required></label>
-      <label>Firma (optional)<input autocomplete="organization" name="company"></label>
-      <label>Telefon (optional)<input type="tel" autocomplete="tel" name="phone"></label>
+      <label>Firma (optional)<input autocomplete="organization" name="company" maxlength="100"></label>
+      <label>Telefon (optional)<input type="tel" autocomplete="tel" name="phone" maxlength="40"></label>
     </div>
-    <label>Ihr Anliegen<textarea name="message" rows="4" required></textarea></label>
+    <label>Ihr Anliegen<textarea name="message" rows="4" maxlength="1200" required></textarea></label>
     <p class="form-note">Hinweise zur Verarbeitung finden Sie in der <a href="@/datenschutz/index.html">Datenschutzerklärung</a>.</p>
     <button class="button primary" type="submit" disabled>Anfrage testen</button>
     <p id="request-status" role="status"></p>
   </form>
-  <details class="booking">
-    <summary>Terminauswahl ausprobieren</summary>
-    <p>Die Uhrzeiten dienen als Beispiele. Es werden keine Termine gebucht.</p>
-    <label>Beispieltermin<select id="demo-slot"><option value="">Uhrzeit auswählen</option><option>09:00</option><option>14:30</option><option>16:00</option></select></label>
-    <button class="button secondary" id="demo-booking" type="button">Terminauswahl testen</button>
-    <p id="booking-status" role="status"></p>
-  </details>
 </div>

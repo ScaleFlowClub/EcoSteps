@@ -52,9 +52,7 @@ def localize_legacy(html):
 
 def legacy(path):
     html = localize_legacy(pages[path]['html'])
-    inquiry = source_inquiry(path)
-    if inquiry:
-        html = re.sub(r'<div class="wpcf7"[^>]*>\s*<div class="screen-reader-response"></div>\s*</div>', lambda _: inquiry, html, count=1)
+    html = re.sub(r'<div class="wpcf7"[^>]*>\s*<div class="screen-reader-response"></div>\s*</div>', '', html)
     videos = original_videos(path)
     if path == 'photovoltaik/eigenverbrauch':
         html = re.sub(r'(<div class="fl-rich-text">.*?)(<p>\s*</p>)', lambda match: match[1]+videos, html, count=1, flags=re.S)
@@ -77,37 +75,31 @@ def original_videos(path):
         for title, url in pages[path].get('videos', [])
     )
 
-def source_inquiry(path):
-    kind = pages[path].get('inquiry')
-    if not kind:
-        return ''
-    if args.live:
-        return f'<p>{link("beratung/index.html",cta,"button primary")}</p>'
-    fields = [('Ihr Name*','text',True), ('Ihre PLZ*','text',True), ('Ihr Ort*','text',True)]
-    if kind == 'contact':
-        fields += [('Ihre E-Mail-Adresse*','email',True), ('Betreff','text',False), ('Ihre Nachricht','textarea',False)]
-    else:
-        fields += [('E-Mail*','email',True), ('Telefonnummer','tel',False)]
-    controls = []
-    for label, field_type, required in fields:
-        constraint = ' required' if required else ''
-        field = '<textarea rows="4"></textarea>' if field_type == 'textarea' else f'<input type="{field_type}"{constraint}>'
-        controls.append(f'<label>{label}{field}</label>')
-    return f"""
-<section class="form-card legacy-inquiry">
-  <h2>{'Schreiben Sie uns eine Nachricht!' if kind == 'contact' else 'Kontakt aufnehmen'}</h2>
-  <p>Offline-Demo. Ihre Angaben werden nicht übertragen.</p>
-  <form data-legacy-inquiry>
-    <div class="fields">{''.join(controls)}</div>
-    <p><a href="@/datenschutz/index.html">Datenschutzerklärung</a></p>
-    <button class="button primary" type="submit" disabled>Senden</button>
-    <p role="status"></p>
-  </form>
-</section>"""
-
-
 def contact():
     return f'<a href="tel:+4922566209841">{phone}</a><br><a href="mailto:{mail}">{mail}</a>'
+
+def contact_trigger(css='button primary'):
+    return f'<a class="{css}" href="@/kontakt/index.html" data-contact-open aria-haspopup="dialog">Kontakt aufnehmen</a>'
+
+def contact_dialog(path):
+    form = (ROOT / 'content/consultation.html').read_text()
+    if args.live:
+        form = form.replace(
+            '<strong>Offline-Demo.</strong> Angaben bleiben in diesem Fenster. Es wird keine Anfrage übertragen.',
+            'Das Formular erstellt einen Entwurf in Ihrem E-Mail-Programm. Sie entscheiden dort über den Versand.'
+        ).replace('Anfrage testen','E-Mail-Entwurf öffnen')
+    booking = (ROOT / 'content/booking-demo.html').read_text() if not args.live and path == 'beratung' else ''
+    return f"""
+<dialog class="reading-dialog contact-dialog" aria-labelledby="contact-title">
+  <div class="reading-panel">
+    <div class="reading-header"><h2 id="contact-title">Kontakt aufnehmen</h2>
+    <button type="button" aria-label="Kontaktfenster schließen" data-contact-close autofocus>×</button></div>
+    <div class="reading-dialog-body">
+      <p class="contact-direct">{contact()}</p>
+      {form}{booking}
+    </div>
+  </div>
+</dialog>"""
 
 def primary_nav(current):
     groups = []
@@ -188,7 +180,8 @@ def layout(path, title, body, description=None):
     legal = ''.join(link(k+'/index.html',label) for k,label in [('impressum','Impressum'),('datenschutz','Datenschutz'),('agb','AGB')] if k in paths)
     consultation = 'beratung/index.html' if 'beratung' in paths else 'kontakt/index.html'
     cookies = '<button type="button" data-cookie-settings>Cookie-Einstellungen</button>' if 'datenschutz' in paths else ''
-    floating = link(consultation,cta+' <span aria-hidden="true">→</span>','fixed-cta') if articles else ''
+    advice = link(consultation,cta+' <span aria-hidden="true">→</span>','fixed-cta button primary')
+    floating = f'<div class="fixed-actions">{contact_trigger("button secondary fixed-contact")}{advice}</div>'
     cookie_file = 'cookies-live.html' if args.live else 'cookies.html'
     banner = (ROOT / 'content' / cookie_file).read_text() if cookies else ''
     footer_links = links + link('referenzen/index.html','Referenzen')
@@ -196,17 +189,17 @@ def layout(path, title, body, description=None):
     metadata = seo_head(path, description)
     doc = f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{escape(title)} · EcoSteps</title>{metadata}<link rel="icon" href="@/assets/ecosteps_logo.jpg" type="image/jpeg"><link rel="stylesheet" href="@/assets/site.css"><script src="@/assets/site.js" defer></script></head>
+<title>{escape(title)} · EcoSteps</title>{metadata}<link rel="icon" href="@/assets/ecosteps_logo.jpg" type="image/jpeg"><script src="@/assets/theme.js"></script><link rel="stylesheet" href="@/assets/site.css"><script src="@/assets/site.js" defer></script></head>
 <body class="{'home' if not path else 'interior'}" data-mode="{'live' if args.live else 'offline'}">
 <div class="site-frame"><a class="skip" href="#inhalt">Zum Inhalt springen</a>
 <header class="header"><div class="wrap header-inner">
 {link('index.html',image('ecosteps_logo.jpg','EcoSteps – Startseite',True),'logo')}
 <button class="menu" type="button" aria-expanded="false" aria-controls="navigation">Menü</button>
-<nav id="navigation" aria-label="Hauptnavigation">{primary_nav(path)}</nav><div class="header-contact">{link("kontakt/index.html","Kontakt")}<a class="header-phone" href="tel:+4922566209841">{phone}</a></div>
+<nav id="navigation" aria-label="Hauptnavigation">{primary_nav(path)}</nav><div class="header-contact">{link("kontakt/index.html","Kontakt")}<a class="header-phone" href="tel:+4922566209841">{phone}</a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Dunkelmodus" aria-pressed="false"><span aria-hidden="true">☾</span></button></div>
 </div></header>
 <main id="inhalt" tabindex="-1">{body}</main>
 <footer class="footer"><div class="wrap footer-grid"><div>{link('index.html',image('ecosteps_logo.jpg','EcoSteps – Startseite'),'logo')}<p>ecosteps GmbH &amp; Co. KG<br>Virnicher Str. 8<br>53894 Mechernich</p>{contact()}</div><div><h2>EcoSteps</h2>{footer_links}</div><div><h2>Rechtliches</h2>{legal}{cookies}</div></div></footer>
-{floating}{banner}</div>
+{floating}{banner}{contact_dialog(path)}</div>
 </body></html>'''
     file.parent.mkdir(parents=True, exist_ok=True)
     file.write_text(doc.replace('@/',prefix),encoding='utf-8')
@@ -355,12 +348,11 @@ for key,p in pages.items():
     if key == 'kontakt':
         body = intro('Kontakt','Schreiben Sie uns eine Nachricht oder rufen Sie uns an.')+f'''
 <section class="section wrap consult">
-  <div class="prose"><h2>Telefon und E-Mail</h2><p>{contact()}</p>{link('beratung/index.html',cta,'button primary')}</div>
+  <div class="prose"><h2>Telefon und E-Mail</h2><p>{contact()}</p>{contact_trigger()}</div>
   <div class="form-card"><h2>Anschrift</h2><address>ecosteps GmbH &amp; Co. KG<br>Virnicher Str. 8<br>53894 Mechernich</address></div>
 </section>'''
     if key == 'beratung' and (ROOT/'content/consultation.html').exists():
-        form = '' if args.live else (ROOT/'content/consultation.html').read_text().replace('@/datenschutz/index.html', '@/impressum/index.html' if 'datenschutz' not in paths else '@/datenschutz/index.html')
-        body = intro('Energieberatung anfragen','Wir klären, welche Lösung zu Ihrem Stromverbrauch, Ihrer Fläche und Ihren Zielen passt.')+f'''<section class="section wrap consult"><div class="prose"><h2>So bereiten Sie sich vor</h2><ul><li>Jahresstromverbrauch oder letzte Stromabrechnung</li><li>Angaben zu einer vorhandenen PV-Anlage und zum Speicher</li><li>Bei Unternehmen die typischen Betriebs- und Verbrauchszeiten</li></ul><h2>Direkter Kontakt</h2>{contact()}</div>{form}</section>'''
+        body = intro('Energieberatung anfragen','Wir klären, welche Lösung zu Ihrem Stromverbrauch, Ihrer Fläche und Ihren Zielen passt.')+f'''<section class="section wrap consult"><div class="prose"><h2>So bereiten Sie sich vor</h2><ul><li>Jahresstromverbrauch oder letzte Stromabrechnung</li><li>Angaben zu einer vorhandenen PV-Anlage und zum Speicher</li><li>Bei Unternehmen die typischen Betriebs- und Verbrauchszeiten</li></ul><h2>Direkter Kontakt</h2>{contact()}<p>{contact_trigger()}</p></div></section>'''
     if key == 'impressum' and (ROOT/'content/legal.html').exists():
         body = intro('Impressum','')+(ROOT/'content/legal.html').read_text()+f'<section class="section wrap prose"><details><summary>Impressum und Datenschutzhinweise der Bestandswebsite</summary>{legacy(key)}</details></section>'
     media = original_media(key)
@@ -369,8 +361,6 @@ for key,p in pages.items():
     if key in highlights:
         intro_end = body.index('</section>') + len('</section>')
         body = body[:intro_end] + key_points(key) + body[intro_end:]
-    if key == 'kontakt':
-        body += f'<div class="wrap prose source-extras">{source_inquiry(key)}</div>'
     layout(key,p_title if key!='beratung' else 'Energieberatung in Mechernich',body,description)
 if articles:
     layout('energieratgeber','Energieratgeber',intro('Energieratgeber','Antworten rund um Solarstrom, Eigenverbrauch und die Planung Ihrer Anlage.')+'<section class="section wrap cards">'+''.join(card(key+'/index.html',a['title'],a['intro']) for key,a in articles.items())+'</section>')

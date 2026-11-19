@@ -1,4 +1,4 @@
-EcoSteps · Offline-Vorschau v1.0.6
+EcoSteps · Offline-Vorschau v1.0.7
 ZIP entpacken und index.html öffnen.
 
 Die Gestaltung, internen Links, Bilder und PDF-Downloads funktionieren lokal.
@@ -55,3 +55,7 @@ Standard-Domain für Canonicals, Sitemap und robots.txt: https://www.ecosteps-so
 Bei anderer Zieldomain: python3 build.py --live --site-url https://www.beispiel.de
 Vor dem Livegang die tatsächliche Domain und die ausgelieferten URLs prüfen.
 Die Offline-Vorschau und das Archiv tragen noindex.
+
+Kontakt in der Live-Fassung
+Das Kontaktfenster bereitet eine Nachricht im lokalen E-Mail-Programm vor.
+Telefon und E-Mail-Adresse stehen dort auch direkt zur Verfügung.

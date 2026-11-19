@@ -509,3 +509,106 @@ body:has(.reading-dialog[open]) { overflow:hidden; }
   .cookie-notice { display:block; }
   .cookie-notice-actions { justify-content:flex-end; margin-top:.55rem; }
 }
+
+.fixed-actions {
+  position:fixed; z-index:4; display:flex; gap:.5rem; align-items:stretch;
+  right:max(1.2rem, calc((100vw - 1440px) / 2 + 1.2rem));
+  bottom:max(.85rem, env(safe-area-inset-bottom));
+}
+.fixed-actions .fixed-cta { position:static; box-shadow:none; }
+.fixed-actions > a { border-radius:50px; white-space:nowrap; box-shadow:0 5px 16px #18375426; }
+.fixed-actions .fixed-contact { background:#f8fbff; color:#143959; border-color:#a7bed5; }
+.fixed-actions .fixed-contact:hover { background:#e4effb; }
+body:has(.cookie[open], .reading-dialog[open]) .fixed-actions,
+.site-frame:has(.cookie-notice:not([hidden])) .fixed-actions { visibility:hidden; }
+.theme-toggle {
+  display:grid; place-items:center; width:2.25rem; min-width:2.25rem; aspect-ratio:1;
+  padding:0; background:var(--light); color:var(--ink); border:1px solid var(--line);
+  border-radius:50%; font-size:1.17rem; line-height:1;
+}
+.theme-toggle:hover { background:var(--paper); }
+.contact-dialog .form-card { padding:0; border:0; background:none; }
+.contact-direct { font-size:.95rem; line-height:1.4; margin-bottom:.8rem; }
+.contact-dialog .form-card > p { margin-bottom:.75rem; }
+.contact-dialog .fields { margin-block:.65rem; }
+.contact-dialog .booking { margin-top:1rem; }
+.contact-dialog .booking label { display:block; }
+.contact-dialog .booking select { margin-left:.5rem; }
+.consult .prose p:last-child { margin-top:1rem; }
+
+.footer {
+  background:linear-gradient(125deg,#eff6fc 24%,#dbeafa);
+  color:#294563; border-top:1px solid #bfd6ed;
+}
+.footer h2,.footer a { color:#153b61; }
+.footer .logo { margin-bottom:1rem; }
+
+.hero-media img,.source-banner img,.story .fl-callout-photo img,.discovery-storage img {
+  filter:saturate(.92) contrast(1.045);
+}
+.source-banner { position:relative; }
+.source-banner img { mask-image:linear-gradient(180deg,transparent,#000 17%,#000 88%,transparent); }
+.story :is(.fl-callout-photo-above-title,.fl-callout-has-photo) .fl-callout-photo img {
+  mask-image:linear-gradient(180deg,#000 72%,transparent 100%);
+}
+@media(min-width:641px) {
+  .story:is(.story-feature,.story-wide) .fl-callout .fl-callout-photo img {
+    mask-image:linear-gradient(90deg,#000 64%,transparent 100%);
+  }
+}
+@media(max-width:760px) {
+  .fixed-actions { right:.6rem; left:.6rem; justify-content:center; gap:.35rem; }
+  .fixed-actions > a { padding:.55rem .55rem; font-size:clamp(.78rem,3.4vw,.9rem); }
+  .fixed-actions .fixed-cta span { display:none; }
+  .header .logo { width:65px; }
+  .header-contact { gap:.36rem; }
+}
+@media(max-width:360px) {
+  .header .logo { width:56px; }
+  .header-inner { gap:.35rem; }
+  .header .menu { padding-inline:.45rem; }
+}
+
+html[data-theme="dark"] {
+  color-scheme:dark;
+  background:#101b29;
+  --brand-green:#b6d6fa;
+  --brand-gray:#192d43;
+  --accent:#a9ccf4;
+  --ink:#e9f2fc;
+  --dark:#101f31;
+  --muted:#c3d4e6;
+  --paper:#17283b;
+  --light:#20374f;
+  --warm:#1b3046;
+  --line:#496581;
+  --blue-link:#c1ddfc;
+}
+[data-theme="dark"] .header,[data-theme="dark"] .home .header { background:#192d43; color:var(--ink); }
+[data-theme="dark"] .header .menu,[data-theme="dark"] .header-phone { color:var(--ink); }
+[data-theme="dark"] :is(.nav-list a:hover,.nav-group[open] summary,.nav-group.active summary) { color:#c6e1ff; }
+[data-theme="dark"] .page-intro { background:linear-gradient(125deg,#1c3652,#14283c); }
+[data-theme="dark"] :is(.page-intro h1,.discovery h2,.home-original h2,.story h3,.metric) { color:#c2ddfa; }
+[data-theme="dark"] .reading-card { background:#223b55; }
+[data-theme="dark"] .reading-card:nth-of-type(4n+3) { background:#254140; }
+[data-theme="dark"] :is(.reading-card button,.reading-header button,.project-comparison figcaption) { color:var(--ink); }
+[data-theme="dark"] :is(.reading-header,.reading-arrow,.cookie-notice,.detail-related) { background:var(--light); }
+[data-theme="dark"] .project-comparison { background-image:linear-gradient(100deg,#20354fe8,#263d55b0),url("ecosteps_slider-gewerbe-eigenverbrauch_NEU.jpg"); border-color:var(--line); }
+[data-theme="dark"] :is(.project-table,.project-table tr:nth-child(even)) { background:var(--paper); }
+[data-theme="dark"] .project-table :is(td,th) { border-color:var(--line); }
+[data-theme="dark"] .discovery-solar { background:radial-gradient(circle at 100% 0%,#2c5377,transparent 70%),var(--light); }
+[data-theme="dark"] .key-points li:nth-child(2) { background:linear-gradient(130deg,#294460,var(--light)); }
+[data-theme="dark"] .key-points li:nth-child(3) { background:repeating-linear-gradient(125deg,#c2ddfa0c 0 1px,transparent 1px 20px),#1c3046; }
+[data-theme="dark"] .story .fl-callout { background:#20384f; border-color:var(--line); }
+[data-theme="dark"] :is(.story-feature,.story:nth-child(6),.story:nth-child(9)) .fl-callout { background:#243d3c; }
+[data-theme="dark"] :is(.story:nth-child(3),.story:nth-child(8)) .fl-callout { background:#302d49; }
+[data-theme="dark"] :is(.story:nth-child(4),.story:nth-child(5)) .fl-callout { background:#3a3531; }
+[data-theme="dark"] .footer { background:linear-gradient(125deg,#223a54,#294660); color:var(--ink); border-color:var(--line); }
+[data-theme="dark"] .footer :is(h2,a) { color:#d9ebff; }
+@media(max-width:760px) {
+  .fixed-actions {
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.22fr);
+    max-width:390px; margin-inline:auto;
+  }
+  .fixed-actions > a { min-width:0; min-height:42px; white-space:normal; text-align:center; line-height:1.2; }
+}

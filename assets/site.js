@@ -19,14 +19,49 @@ document.addEventListener('keydown', event => {
   }
 });
 
-const requestForm = document.querySelector('#request-form');
-if (requestForm) {
-  requestForm.addEventListener('submit', event => {
+const contactDialog = document.querySelector('.contact-dialog');
+const requestForm = contactDialog.querySelector('#request-form');
+const requestStatus = contactDialog.querySelector('#request-status');
+const isOffline = document.body.dataset.mode === 'offline';
+let contactOpener;
+
+document.querySelectorAll('[data-contact-open]').forEach(trigger => {
+  trigger.addEventListener('click', event => {
+    if (!contactDialog.showModal) return;
     event.preventDefault();
-    document.querySelector('#request-status').textContent = 'Demo abgeschlossen. Ihre Anfrage wurde nicht übertragen.';
+    contactOpener = trigger;
+    contactDialog.showModal();
   });
-  requestForm.querySelector('button[type=submit]').disabled = false;
-  document.querySelector('#demo-booking').addEventListener('click', () => {
+});
+contactDialog.querySelector('[data-contact-close]').addEventListener('click', () => contactDialog.close());
+contactDialog.addEventListener('click', event => {
+  if (event.target === contactDialog) contactDialog.close();
+});
+contactDialog.addEventListener('close', () => contactOpener?.focus());
+requestForm.addEventListener('submit', event => {
+  event.preventDefault();
+  if (isOffline) {
+    requestStatus.textContent = 'Demo abgeschlossen. Ihre Anfrage wurde nicht übertragen.';
+    return;
+  }
+  const fields = new FormData(requestForm);
+  const subject = fields.get('audience') === 'business' ? 'Anfrage von einem Unternehmen' : 'Anfrage von einem Privathaushalt';
+  const body = [
+    `Name: ${fields.get('name')}`,
+    `E-Mail: ${fields.get('email')}`,
+    fields.get('company') && `Firma: ${fields.get('company')}`,
+    fields.get('phone') && `Telefon: ${fields.get('phone')}`,
+    `\n${fields.get('message')}`
+  ].filter(Boolean).join('\n');
+  const recipient = contactDialog.querySelector('a[href^="mailto:"]').href;
+  requestStatus.textContent = 'Der Entwurf kann im E-Mail-Programm geprüft und versendet werden.';
+  window.location.href = `${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+});
+requestForm.querySelector('button[type=submit]').disabled = false;
+
+const demoBooking = document.querySelector('#demo-booking');
+if (demoBooking) {
+  demoBooking.addEventListener('click', () => {
     const slot = document.querySelector('#demo-slot').value;
     document.querySelector('#booking-status').textContent = slot
       ? `Demo-Termin um ${slot} Uhr ausgewählt. Es wurde kein Termin gebucht.`
@@ -94,12 +129,12 @@ if (cookie) {
     });
     if (location.protocol === 'file:') {
       document.querySelectorAll('a[href]').forEach(anchor => {
-        const original = new URL(anchor.href);
-        if (original.protocol !== 'file:' || original.pathname === location.pathname || !original.pathname.endsWith('.html')) return;
         function carryConsent() {
-          if (!consent) return;
-          original.searchParams.set('cookie-demo', consent);
-          anchor.href = original.href;
+          const target = new URL(anchor.href);
+          if (!consent || target.protocol !== 'file:' || target.pathname === location.pathname ||
+              !target.pathname.endsWith('.html')) return;
+          target.searchParams.set('cookie-demo', consent);
+          anchor.href = target.href;
         }
         anchor.addEventListener('click', carryConsent);
         anchor.addEventListener('focus', carryConsent);
@@ -132,33 +167,6 @@ if (hero && !reducedMotion.matches && !window.matchMedia('(max-width: 760px)').m
       frame = undefined;
     });
   }, { passive: true });
-}
-
-document.querySelectorAll('[data-legacy-inquiry]').forEach(form => {
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    form.querySelector('[role=status]').textContent = 'Demo abgeschlossen. Ihre Anfrage wurde nicht übertragen.';
-  });
-  form.querySelector('button[type=submit]').disabled = false;
-});
-
-const navGroups = [...navigation.querySelectorAll('.nav-group')];
-navGroups.forEach(group => group.addEventListener('toggle', () => {
-  if (group.open) navGroups.filter(other => other !== group).forEach(other => { other.open = false; });
-}));
-document.addEventListener('click', event => {
-  if (!navigation.contains(event.target)) navGroups.forEach(group => { group.open = false; });
-});
-
-const slideButton = document.querySelector('[data-slide-next]');
-if (slideButton) {
-  const slides = [...document.querySelectorAll('[data-hero-slides] .hero-media')];
-  let current = 0;
-  slideButton.addEventListener('click', () => {
-    slides[current].hidden = true;
-    current = (current + 1) % slides.length;
-    slides[current].hidden = false;
-  });
 }
 
 const cookieNotice = document.querySelector('.cookie-notice');

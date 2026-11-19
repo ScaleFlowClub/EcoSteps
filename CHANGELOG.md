@@ -90,3 +90,9 @@
 - Umfangreiche Themenseiten und Ratgeber mit anklickbaren Abschnittstiteln und Lesefenstern ausgestattet. Originaltexte und Sprungziele bleiben im statischen HTML.
 - Originaltabelle der Werkstattrechnung mit Projektmotiv und Tabellenrahmen gestaltet.
 - Live-Cookie-Hinweis und Datenschutzhinweis ergänzt. In der Offline-Fassung bleibt die testbare Auswahl verfügbar.
+
+## Designversion 1.0.7
+
+- Eingebettete Kontaktformulare durch ein gemeinsames Kontaktfenster ersetzt. Der feste Kontaktbutton steht links neben der Energieberatung.
+- Offline-Formular als Demo und live als E-Mail-Entwurf. Hell-Dunkel-Umschaltung mit Speicherung im Browser ergänzt.
+- Footer aufgehellt und Originalfotos mit weicheren Übergängen eingebunden. Hausgrafiken und Tabellen erhalten.
