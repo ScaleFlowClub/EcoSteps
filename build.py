@@ -27,7 +27,7 @@ def image(name, alt, eager=False):
 
 def card(path, heading, desc, photo=None):
     illustration = image(*photo) if photo else ''
-    return f'<article class="card">{illustration}<div><h3>{link(path, heading)}</h3><p>{desc}</p>{link(path, "Mehr erfahren <span aria-hidden=true>↗︎</span>", "text-link")}</div></article>'
+    return f'<article class="card">{illustration}<div><h3>{link(path, heading)}</h3><p>{desc}</p>{link(path, "Mehr erfahren <span aria-hidden=true>→</span>", "text-link")}</div></article>'
 
 def intro(title, copy, eyebrow='EcoSteps'):
     return f'<section class="page-intro"><div class="wrap"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{copy}</p></div></section>'
@@ -56,14 +56,14 @@ def layout(path, title, body):
     legal = ''.join(link(k+'/index.html',label) for k,label in [('impressum','Impressum'),('datenschutz','Datenschutz'),('agb','AGB')] if k in paths)
     consultation = 'beratung/index.html' if 'beratung' in paths else 'kontakt/index.html'
     cookies = '<button type="button" data-cookie-settings>Cookie-Einstellungen</button>' if 'datenschutz' in paths else ''
-    floating = link(consultation,cta+' <span aria-hidden="true">↗︎</span>','fixed-cta') if articles else ''
+    floating = link(consultation,cta+' <span aria-hidden="true">→</span>','fixed-cta') if articles else ''
     cookie_file = 'cookies-live.html' if args.live else 'cookies.html'
     banner = (ROOT / 'content' / cookie_file).read_text() if cookies else ''
     footer_links = links + link('referenzen/index.html','Referenzen')
     doc = f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)} · EcoSteps</title><link rel="stylesheet" href="@/assets/site.css"><script src="@/assets/site.js" defer></script></head>
-<body data-mode="{'live' if args.live else 'offline'}">
+<body class="{'home' if not path else 'interior'}" data-mode="{'live' if args.live else 'offline'}">
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 <header class="header"><div class="wrap header-inner">
 {link('index.html',image('ecosteps_logo.jpg','EcoSteps – Startseite',True),'logo')}
@@ -78,13 +78,96 @@ def layout(path, title, body):
     file.write_text(doc.replace('@/',prefix),encoding='utf-8')
 
 def homepage():
-    hero = f'''<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">Photovoltaik · Speicher · Energieberatung</p><h1>Solarstrom.<br><em>Für Ihren Alltag.</em></h1><p>Wir planen Photovoltaik für Privathaushalte und Unternehmen. Nutzen Sie mehr eigenen Strom, senken Sie Ihre Energiekosten und beziehen Sie weniger aus dem Netz.</p>{link('beratung/index.html',cta+' <span aria-hidden="true">↗︎</span>','button primary')}</div><figure class="hero-media">{image('ecosteps_640x385-teaser_home-gewerbe.jpg','Photovoltaikmodule auf den Dächern eines Gewerbegebäudes',True)}</figure></div></section>
-<section class="proof"><div class="wrap"><span><strong>Seit 2005</strong> im Solarmarkt</span><span><strong>Produktneutral</strong> beraten</span><span><strong>Individuell</strong> geplant</span></div></section>'''
-    services = ''.join([card('photovoltaik/eigenverbrauch/index.html','Photovoltaik','Solarstrom erzeugen und passend zum eigenen Verbrauch nutzen.'),card('speicher/eigenverbrauch/index.html','Stromspeicher','Tagsüber erzeugten Solarstrom für später speichern.'),card('service/index.html','Anlagenservice','Erträge im Blick behalten und bestehende Technik weiterentwickeln.')])
-    audience = ''.join([card('photovoltaik/eigenverbrauch/index.html','Für Privathaushalte','Planen Sie Solarstrom für Ihr Zuhause.',('ecosteps_640x385-teaser_home-4.jpg','Zwei Menschen genießen die Sonne')),card('gewerbekunden/eigenverbrauch/index.html','Für Unternehmen','Richten Sie die Anlage an Betriebszeiten und Verbrauch aus.',('ecosteps_640x385-teaser_home-gewerbe.jpg','Solarmodule auf Gewerbedächern'))])
-    guide = f'<section class="highlight"><div class="wrap"><p class="eyebrow">Energieratgeber</p><h2>Wie viel Solarstrom können Sie selbst nutzen?</h2><p>Erfahren Sie, wie Eigenverbrauch, Speicher und Anlagengröße zusammenspielen.</p>{link("energieratgeber/index.html","Zum Energieratgeber ↗︎","button primary")}</div></section>' if articles else ''
-    references = card('referenzen/index.html','PV-Anlage auf einer Kfz-Werkstatt','Das Bestandsbeispiel zeigt 54,2 kWp Anlagenleistung und einen solaren Deckungsanteil von 60,7 %.',('werkstatt.jpg','Arbeit in einer Kfz-Werkstatt, Motiv der Bestandsseite'))
-    return hero+f'<section class="section wrap"><p class="eyebrow">Unsere Leistungen</p><h2>Technik, die zu Ihrem Verbrauch passt.</h2><div class="cards">{services}</div></section><section class="section light"><div class="wrap"><h2>Solarstrom für Zuhause und Betrieb</h2><div class="cards two">{audience}</div></div></section>'+guide+f'<section class="section wrap"><p class="eyebrow">Erfahrung mit Photovoltaik</p><h2>Fast 1.000 Anlagen von 2008 bis 2015</h2><div class="cards two">{references}</div><p class="archive-link">{link("bestand/startseite/index.html","Meldungen und Angebote der bisherigen Startseite ↗︎","text-link")}</p></section>'
+    hero = f"""
+<section class="hero" aria-labelledby="home-title">
+  <figure class="hero-media">{image('ecosteps_640x385-teaser_home-gewerbe.jpg','Photovoltaik auf den Dächern eines Gewerbegebäudes',True)}</figure>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Photovoltaik · Speicher · Energieberatung</p>
+      <h1 id="home-title">Solarstrom.<br><em>Für Ihren Alltag.</em></h1>
+      <p>Wir planen Photovoltaik für Privathaushalte und Unternehmen. Nutzen Sie mehr eigenen Strom und senken Sie Ihren Netzbezug.</p>
+      {link('beratung/index.html',cta+' <span aria-hidden="true">→</span>','button primary')}
+    </div>
+    <aside class="hero-note">
+      <strong>Seit 2005</strong>
+      <span>EcoSteps plant Photovoltaik für Haushalte und Betriebe.</span>
+    </aside>
+  </div>
+</section>
+<section class="proof" aria-label="So arbeitet EcoSteps"><div class="wrap">
+  <span><strong>Produktneutral</strong> beraten</span>
+  <span><strong>Individuell</strong> geplant</span>
+  <span><strong>Vor Ort</strong> in Mechernich</span>
+</div></section>"""
+
+    approach = f"""
+<section class="section wrap approach">
+  <div class="section-heading"><p class="eyebrow">Eigenverbrauch</p><h2>Mehr vom eigenen<br>Solarstrom nutzen.</h2></div>
+  <div class="cards feature-grid">
+    <article class="card feature feature-simple"><div>
+      <h3>Solarstrom direkt nutzen</h3>
+      <p>Wenn Ihre Anlage Strom erzeugt, versorgt sie laufende Geräte direkt.</p>
+      {link('photovoltaik/eigenverbrauch/index.html','So funktioniert Eigenverbrauch <span aria-hidden="true">→</span>','text-link')}
+    </div></article>
+    <article class="card feature feature-photo">
+      {image('ecosteps_640x385-teaser_home-4.jpg','Zwei Menschen genießen die Sonne')}
+      <div><h3>Für den Abend speichern</h3><p>Ein Speicher macht Solarstrom auch nach Sonnenuntergang nutzbar.</p>
+      {link('speicher/eigenverbrauch/index.html','Speicher kennenlernen <span aria-hidden="true">→</span>','text-link')}</div>
+    </article>
+    <article class="card feature feature-dark"><div>
+      <p class="feature-number">60,7<span> %</span></p>
+      <h3>Solarer Deckungsanteil</h3>
+      <p>In der dokumentierten Jahresrechnung für eine Kfz-Werkstatt.</p>
+      {link('gewerbekunden/eigenverbrauch/index.html','Werkstattbeispiel ansehen <span aria-hidden="true">→</span>','text-link')}
+    </div></article>
+  </div>
+</section>"""
+
+    services = [
+        ('photovoltaik/eigenverbrauch/index.html','Photovoltaik','Anlagen passend zu Dachfläche und Stromverbrauch.'),
+        ('speicher/eigenverbrauch/index.html','Stromspeicher','Solarstrom speichern und später nutzen.'),
+        ('heizung/waerme-erzeugen/index.html','Wärme mit Solarstrom','Überschüsse für Warmwasser und Heizung einsetzen.'),
+        ('service/index.html','Anlagenservice','Erträge prüfen und bestehende Anlagen betreuen.'),
+    ]
+    service_rows = ''.join(
+        f'<li>{link(url, f"<strong>{title}</strong><span>{description}</span><span class=service-arrow aria-hidden=true>→</span>")}</li>'
+        for url, title, description in services
+    )
+    offering = f"""
+<section class="section offering">
+  <div class="wrap offering-grid">
+    <div>
+      <p class="eyebrow">Leistungen</p><h2>Von der Planung<br>bis zum Anlagenservice.</h2>
+      {link('leistungen/index.html','Alle Leistungen <span aria-hidden="true">→</span>','button primary')}
+      <div class="offering-photos">
+        {image('ecosteps_PhoVo_Produkte.jpg','Photovoltaikmotiv aus der EcoSteps-Produktübersicht')}
+        {image('ecosteps_640x385-teaser_home-gewerbe.jpg','Photovoltaik auf einem Gewerbedach')}
+      </div>
+    </div>
+    <ul class="service-list">{service_rows}</ul>
+  </div>
+</section>
+<section class="section wrap">
+  <div class="section-heading"><p class="eyebrow">Für wen wir planen</p><h2>Solarstrom für Zuhause<br>und den Betrieb.</h2></div>
+  <div class="audience-links">
+    {link('photovoltaik/eigenverbrauch/index.html','Für Privathaushalte <span aria-hidden="true">→</span>')}
+    {link('gewerbekunden/eigenverbrauch/index.html','Für Unternehmen <span aria-hidden="true">→</span>')}
+  </div>
+</section>
+<section class="highlight"><div class="wrap guide-grid"><div>
+  <p class="eyebrow">Energieratgeber</p><h2>Wie viel Solarstrom können Sie selbst nutzen?</h2>
+  <p>Erfahren Sie, wie Eigenverbrauch, Speicher und Anlagengröße zusammenspielen.</p></div>
+  {link('energieratgeber/index.html','Zum Energieratgeber <span aria-hidden="true">→</span>','button primary')}
+</div></section>
+<section class="section wrap home-references">
+  <p class="eyebrow">Referenzen</p><h2>Fast 1.000 Anlagen von 2008 bis 2015.</h2>
+  <div class="audience-links">
+    {link('referenzen/index.html','Referenzen ansehen <span aria-hidden="true">→</span>')}
+    {link('bestand/startseite/index.html','Bisherige Meldungen und Angebote <span aria-hidden="true">→</span>')}
+  </div>
+</section>"""
+    return hero + approach + offering
+
 
 categories = {'photovoltaik':'Photovoltaik','speicher':'Stromspeicher','heizung':'Heizung','gewerbekunden':'Für Unternehmen','beratung':'Energieberatung'}
 paths = set(pages) | {'leistungen','bestand/startseite','referenzen'}
@@ -101,7 +184,7 @@ for category, label in categories.items():
     if entries:
         sections += f'<h2>{label}</h2><ul>'+''.join(f'<li>{link(k+"/index.html",escape(p["title"].split(" - ")[-1]))}</li>' for k,p in entries)+'</ul>'
 layout('referenzen','Referenzen',intro('Referenzen','Beispiele aus der bisherigen EcoSteps-Website.')+'<section class="section wrap cards two">'+card('gewerbekunden/eigenverbrauch/index.html','Kfz-Werkstatt','Historisches Anlagenbeispiel mit Leistungsprofil und Jahreswerten.',('werkstatt.jpg','Arbeit in einer Kfz-Werkstatt, Motiv der Bestandsseite'))+card('photovoltaik/eigenverbrauch/index.html#4','Kundenanlagen','Historische Beispiele für Eigenverbrauch in Privathaushalten.')+'</section>')
-layout('leistungen','Leistungen',intro('Unsere Leistungen','Photovoltaik, Speicher, Wärme und Anlagenservice.')+f'<section class="section wrap prose">{sections}<h2>Anlagenservice</h2>{link("service/index.html","Zum Anlagenservice ↗︎","text-link")}</section>')
+layout('leistungen','Leistungen',intro('Unsere Leistungen','Photovoltaik, Speicher, Wärme und Anlagenservice.')+f'<section class="section wrap prose">{sections}<h2>Anlagenservice</h2>{link("service/index.html","Zum Anlagenservice →","text-link")}</section>')
 for key,p in pages.items():
     if not key: continue
     title = escape(p['title'])
