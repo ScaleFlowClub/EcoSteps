@@ -6,7 +6,14 @@ function setMenu(open) {
 }
 menu.addEventListener('click', () => setMenu(menu.getAttribute('aria-expanded') !== 'true'));
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
+  if (event.key !== 'Escape') return;
+  const opened = navigation.querySelector('.nav-group[open]');
+  if (opened) {
+    opened.open = false;
+    opened.querySelector('summary').focus();
+    return;
+  }
+  if (menu.getAttribute('aria-expanded') === 'true') {
     setMenu(false);
     menu.focus();
   }
@@ -134,3 +141,22 @@ document.querySelectorAll('[data-legacy-inquiry]').forEach(form => {
   });
   form.querySelector('button[type=submit]').disabled = false;
 });
+
+const navGroups = [...navigation.querySelectorAll('.nav-group')];
+navGroups.forEach(group => group.addEventListener('toggle', () => {
+  if (group.open) navGroups.filter(other => other !== group).forEach(other => { other.open = false; });
+}));
+document.addEventListener('click', event => {
+  if (!navigation.contains(event.target)) navGroups.forEach(group => { group.open = false; });
+});
+
+const slideButton = document.querySelector('[data-slide-next]');
+if (slideButton) {
+  const slides = [...document.querySelectorAll('[data-hero-slides] .hero-media')];
+  let current = 0;
+  slideButton.addEventListener('click', () => {
+    slides[current].hidden = true;
+    current = (current + 1) % slides.length;
+    slides[current].hidden = false;
+  });
+}

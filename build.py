@@ -41,7 +41,16 @@ def localize_legacy(html):
     return html
 
 def legacy(path):
-    return f'<div class="archive">{localize_legacy(pages[path]["html"])}</div>'
+    html = localize_legacy(pages[path]['html'])
+    inquiry = source_inquiry(path)
+    if inquiry:
+        html = re.sub(r'<div class="wpcf7"[^>]*>\s*<div class="screen-reader-response"></div>\s*</div>', lambda _: inquiry, html, count=1)
+    videos = original_videos(path)
+    if path == 'photovoltaik/eigenverbrauch':
+        html = re.sub(r'(<div class="fl-rich-text">.*?)(<p>\s*</p>)', lambda match: match[1]+videos, html, count=1, flags=re.S)
+    if path == 'speicher/eigenverbrauch':
+        html = re.sub(r'<div class="fl-video fl-embed-video"[^>]*>\s*</div>', lambda _: videos, html, count=1)
+    return f'<div class="archive">{html}</div>'
 
 def original_media(path):
     return ''.join(image(name, '') for name in pages[path].get('banners', []))
@@ -84,6 +93,27 @@ def source_inquiry(path):
 def contact():
     return f'<a href="tel:+4922566209841">{phone}</a><br><a href="mailto:{mail}">{mail}</a>'
 
+def primary_nav(current):
+    groups = []
+    for item in nav_items:
+        label = escape(item['title'])
+        if item['children']:
+            children = []
+            for child in item['children']:
+                slug = child['path']
+                active = ' aria-current="page"' if slug == current else ''
+                children.append(f'<li><a href="@/{slug}/index.html"{active}>{escape(child["title"])}</a></li>')
+            category = item['children'][0]['path'].split('/')[0]
+            if category == 'beratung':
+                children.append(f'<li>{link("beratung/index.html",cta,"nav-inquiry")}</li>')
+            current_category = ' active' if current.split('/')[0] == category else ''
+            groups.append(f'<li><details class="nav-group{current_category}"><summary>{label}</summary><ul>{"".join(children)}</ul></details></li>')
+        else:
+            active = ' aria-current="page"' if item['path'] == current else ''
+            groups.append(f'<li><a href="@/{item["path"]}/index.html"{active}>{label}</a></li>')
+    return '<ul class="nav-list">'+''.join(groups)+'</ul>'
+
+
 def layout(path, title, body):
     file = OUT / (path+'/index.html' if path else 'index.html')
     depth = len(Path(path).parts)
@@ -107,7 +137,7 @@ def layout(path, title, body):
 <header class="header"><div class="wrap header-inner">
 {link('index.html',image('ecosteps_logo.jpg','EcoSteps – Startseite',True),'logo')}
 <button class="menu" type="button" aria-expanded="false" aria-controls="navigation">Menü</button>
-<nav id="navigation" aria-label="Hauptnavigation">{links}</nav><a class="header-phone" href="tel:+4922566209841">{phone}</a>
+<nav id="navigation" aria-label="Hauptnavigation">{primary_nav(path)}</nav><div class="header-contact">{link("kontakt/index.html","Kontakt")}<a class="header-phone" href="tel:+4922566209841">{phone}</a></div>
 </div></header>
 <main id="inhalt" tabindex="-1">{body}</main>
 <footer class="footer"><div class="wrap footer-grid"><div>{link('index.html',image('ecosteps_logo.jpg','EcoSteps – Startseite'),'logo')}<p>ecosteps GmbH &amp; Co. KG<br>Virnicher Str. 8<br>53894 Mechernich</p>{contact()}</div><div><h2>EcoSteps</h2>{footer_links}</div><div><h2>Rechtliches</h2>{legal}{cookies}</div></div></footer>
@@ -117,105 +147,40 @@ def layout(path, title, body):
     file.write_text(doc.replace('@/',prefix),encoding='utf-8')
 
 def homepage():
-    hero = f"""
-<section class="hero" aria-labelledby="home-title">
-  <figure class="hero-media">{image('ecosteps_640x385-teaser_home-gewerbe.jpg','Photovoltaik auf den Dächern eines Gewerbegebäudes',True)}</figure>
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow">Photovoltaik · Speicher · Energieberatung</p>
-      <h1 id="home-title">Solarstrom.<br><em>Für Ihren Alltag.</em></h1>
-      <p>Wir planen Photovoltaik für Privathaushalte und Unternehmen. Nutzen Sie mehr eigenen Strom und senken Sie Ihren Netzbezug.</p>
-      {link('beratung/index.html',cta+' <span aria-hidden="true">→</span>','button primary')}
-    </div>
-    <aside class="hero-note">
-      <strong>Seit 2005</strong>
-      <span>EcoSteps plant Photovoltaik für Haushalte und Betriebe.</span>
-    </aside>
-  </div>
-</section>
-<section class="proof" aria-label="So arbeitet EcoSteps"><div class="wrap">
-  <span><strong>Produktneutral</strong> beraten</span>
-  <span><strong>Individuell</strong> geplant</span>
-  <span><strong>Vor Ort</strong> in Mechernich</span>
-</div></section>"""
-
-    approach = f"""
-<section class="section wrap approach">
-  <div class="section-heading"><p class="eyebrow">Eigenverbrauch</p><h2>Mehr vom eigenen<br>Solarstrom nutzen.</h2></div>
-  <div class="cards feature-grid">
-    <article class="card feature feature-simple"><div>
-      <h3>Solarstrom direkt nutzen</h3>
-      <p>Wenn Ihre Anlage Strom erzeugt, versorgt sie laufende Geräte direkt.</p>
-      {link('photovoltaik/eigenverbrauch/index.html','So funktioniert Eigenverbrauch <span aria-hidden="true">→</span>','text-link')}
-    </div></article>
-    <article class="card feature feature-photo">
-      {image('ecosteps_640x385-teaser_home-4.jpg','Zwei Menschen genießen die Sonne')}
-      <div><h3>Für den Abend speichern</h3><p>Ein Speicher macht Solarstrom auch nach Sonnenuntergang nutzbar.</p>
-      {link('speicher/eigenverbrauch/index.html','Speicher kennenlernen <span aria-hidden="true">→</span>','text-link')}</div>
-    </article>
-    <article class="card feature feature-dark"><div>
-      <p class="feature-number">60,7<span> %</span></p>
-      <h3>Solarer Deckungsanteil</h3>
-      <p>In der dokumentierten Jahresrechnung für eine Kfz-Werkstatt.</p>
-      {link('gewerbekunden/eigenverbrauch/index.html','Werkstattbeispiel ansehen <span aria-hidden="true">→</span>','text-link')}
-    </div></article>
-  </div>
-</section>"""
-
-    services = [
-        ('photovoltaik/eigenverbrauch/index.html','Photovoltaik','Anlagen passend zu Dachfläche und Stromverbrauch.'),
-        ('speicher/eigenverbrauch/index.html','Stromspeicher','Solarstrom speichern und später nutzen.'),
-        ('heizung/waerme-erzeugen/index.html','Wärme mit Solarstrom','Überschüsse für Warmwasser und Heizung einsetzen.'),
-        ('service/index.html','Anlagenservice','Erträge prüfen und bestehende Anlagen betreuen.'),
-    ]
-    service_rows = ''.join(
-        f'<li>{link(url, f"<strong>{title}</strong><span>{description}</span><span class=service-arrow aria-hidden=true>→</span>")}</li>'
-        for url, title, description in services
+    original = pages['']
+    slides = ''.join(
+        f'<figure class="hero-media"{" hidden" if index else ""}>{image(name, "", index == 0)}</figure>'
+        for index, name in enumerate(original['banners'])
     )
-    offering = f"""
-<section class="section offering">
-  <div class="wrap offering-grid">
-    <div>
-      <p class="eyebrow">Leistungen</p><h2>Von der Planung<br>bis zum Anlagenservice.</h2>
-      {link('leistungen/index.html','Alle Leistungen <span aria-hidden="true">→</span>','button primary')}
-      <div class="offering-photos">
-        {image('ecosteps_PhoVo_Produkte.jpg','Photovoltaikmotiv aus der EcoSteps-Produktübersicht')}
-        {image('ecosteps_640x385-teaser_home-gewerbe.jpg','Photovoltaik auf einem Gewerbedach')}
-      </div>
-    </div>
-    <ul class="service-list">{service_rows}</ul>
-  </div>
-</section>
-<section class="section wrap">
-  <div class="section-heading"><p class="eyebrow">Für wen wir planen</p><h2>Solarstrom für Zuhause<br>und den Betrieb.</h2></div>
-  <div class="audience-links">
-    {link('photovoltaik/eigenverbrauch/index.html','Für Privathaushalte <span aria-hidden="true">→</span>')}
-    {link('gewerbekunden/eigenverbrauch/index.html','Für Unternehmen <span aria-hidden="true">→</span>')}
-  </div>
+    hero = f"""
+<section class="hero" aria-labelledby="home-title" data-hero-slides>
+  {slides}
+  <div class="wrap hero-grid"><div class="hero-copy">
+    <h1 id="home-title">Photovoltaik für<br>Haus und Gewerbe.</h1>
+    {link('beratung/index.html',cta+' <span aria-hidden="true">→</span>','button primary')}
+  </div></div>
+  <div class="wrap slide-control"><button type="button" data-slide-next aria-label="Nächstes Startseitenbild"><span aria-hidden="true">→</span></button></div>
+</section>"""
+    teasers = [localize_legacy(teaser) for teaser in original['teasers']]
+    rows = [(0, 1, 'featured'), (1, 2, 'featured'), (2, 4, 'pair'),
+            (4, 6, 'pair'), (6, 7, 'featured'), (7, 9, 'pair')]
+    original_rows = ''.join(
+        f'<div class="home-original-row {style}">{"".join(teasers[start:end])}</div>'
+        for start, end, style in rows
+    )
+    return hero + f"""
+<section class="section wrap home-original" id="ecosteps-bestand" aria-label="EcoSteps Angebote">
+  <div class="home-original-grid">{original_rows}</div>
+  <p class="notice">Preis-, Förder- und Leistungsangaben in den Originalbeiträgen können zeitgebunden sein.</p>
 </section>
 <section class="highlight"><div class="wrap guide-grid"><div>
-  <p class="eyebrow">Energieratgeber</p><h2>Wie viel Solarstrom können Sie selbst nutzen?</h2>
-  <p>Erfahren Sie, wie Eigenverbrauch, Speicher und Anlagengröße zusammenspielen.</p></div>
-  {link('energieratgeber/index.html','Zum Energieratgeber <span aria-hidden="true">→</span>','button primary')}
-</div></section>
-<section class="section wrap home-references">
-  <p class="eyebrow">Referenzen</p><h2>Fast 1.000 Anlagen von 2008 bis 2015.</h2>
-  <div class="audience-links">
-    {link('referenzen/index.html','Referenzen ansehen <span aria-hidden="true">→</span>')}
-    {link('bestand/startseite/index.html','Bisherige Meldungen und Angebote <span aria-hidden="true">→</span>')}
-  </div>
-</section>"""
-    teasers = ''.join(localize_legacy(teaser) for teaser in pages['']['teasers'])
-    original_section = f"""
-<section class="section wrap home-original" id="ecosteps-bestand">
-  <h2>Aktuelles und Angebote von EcoSteps</h2>
-  <p class="notice">Originalbeiträge der bisherigen Website. Preis-, Förder- und Leistungsangaben können zeitgebunden sein.</p>
-  <div class="home-original-media">{original_media('')}</div>
-  <div class="home-original-grid">{teasers}</div>
-</section>"""
-    return hero + approach + offering + original_section
+  <h2>Welches Angebot passt zu Ihnen?</h2>
+  <p>Informieren Sie sich über Eigenverbrauch und Anlagenplanung oder sprechen Sie direkt mit uns.</p>
+  {link('energieratgeber/index.html','Energieratgeber →','text-link')}
+</div>{link('beratung/index.html',cta,'button primary')}</div></section>"""
 
 
+nav_items = json.loads((ROOT / "content/navigation.json").read_text())
 topics = json.loads((ROOT / 'content/topics.json').read_text())
 paths = set(pages) | {'leistungen','bestand/startseite','referenzen'}
 if articles:
@@ -296,11 +261,8 @@ for key,p in pages.items():
     media = original_media(key)
     if media:
         body = body.replace('</section>', f'<div class="wrap source-banner">{media}</div></section>', 1)
-    extras = original_videos(key)
-    if key != 'beratung':
-        extras += source_inquiry(key)
-    if extras:
-        body += f'<div class="wrap prose source-extras">{extras}</div>'
+    if key == 'kontakt':
+        body += f'<div class="wrap prose source-extras">{source_inquiry(key)}</div>'
     layout(key,p_title if key!='beratung' else 'Beratungsgespräch anfragen',body)
 if articles:
     layout('energieratgeber','Energieratgeber',intro('Energieratgeber','Antworten rund um Solarstrom, Eigenverbrauch und die Planung Ihrer Anlage.')+'<section class="section wrap cards">'+''.join(card(key+'/index.html',a['title'],a['intro']) for key,a in articles.items())+'</section>')

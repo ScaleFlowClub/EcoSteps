@@ -59,3 +59,10 @@
 - 20 zusätzliche Banner- und Sliderdateien von den Originalseiten übernommen. Die zugehörigen Unterseiten zeigen ihre ursprünglichen Motive.
 - Beide YouTube-Videos verlinkt und die ursprünglichen Felder der Kontakt- und Rückrufformulare als Offline-Demos ergänzt.
 - Offline- und Live-Build erstellt. Entpackte ZIP, Medien, Texte und Formularablauf geprüft.
+
+## Designversion 1.0.4
+
+- Hauptnavigation und Reihenfolge der Unterpunkte anhand des ursprünglichen Headers wiederhergestellt. Beratungsanfrage und Kontakt sind direkt erreichbar.
+- Startseite mit Originalslider und den neun Beiträgen in Originalreihenfolge aufgebaut. Videos und Formulare stehen auf den Themenseiten wieder an ihrer ursprünglichen Stelle.
+- Dunkle Grauflächen mit den Originalmarkenfarben Grün (#94c11c), Orange (#fbb331) und Grau (#5a666b) gestaltet.
+- Desktop- und Mobilnavigation, Tastaturbedienung, Bildwechsel und Offline-ZIP geprüft.

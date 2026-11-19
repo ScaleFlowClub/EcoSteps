@@ -1,0 +1,105 @@
+[
+  {
+    "title": "Photovoltaik",
+    "path": "",
+    "children": [
+      {
+        "title": "Eigenverbrauch",
+        "path": "photovoltaik/eigenverbrauch"
+      },
+      {
+        "title": "Standort",
+        "path": "photovoltaik/standort"
+      },
+      {
+        "title": "Technik",
+        "path": "photovoltaik/technik"
+      },
+      {
+        "title": "Produkte",
+        "path": "photovoltaik/produkte"
+      }
+    ]
+  },
+  {
+    "title": "Speicher",
+    "path": "",
+    "children": [
+      {
+        "title": "Eigenverbrauch",
+        "path": "speicher/eigenverbrauch"
+      },
+      {
+        "title": "Notstromversorgung",
+        "path": "speicher/notstromversorgung"
+      },
+      {
+        "title": "Technik",
+        "path": "speicher/technik"
+      },
+      {
+        "title": "Produkte",
+        "path": "speicher/produkte"
+      }
+    ]
+  },
+  {
+    "title": "Heizung",
+    "path": "",
+    "children": [
+      {
+        "title": "Wärme erzeugen",
+        "path": "heizung/waerme-erzeugen"
+      },
+      {
+        "title": "Warmwasserbereitung",
+        "path": "heizung/warmwasserbereitung"
+      },
+      {
+        "title": "Heizungsunterstützung",
+        "path": "heizung/heizungsunterstuetzung"
+      }
+    ]
+  },
+  {
+    "title": "Service",
+    "path": "service",
+    "children": []
+  },
+  {
+    "title": "Beratung",
+    "path": "",
+    "children": [
+      {
+        "title": "Beratungsqualität",
+        "path": "beratung/beratungsqualität"
+      },
+      {
+        "title": "Förderung und Darlehen",
+        "path": "beratung/foerderung-darlehen"
+      }
+    ]
+  },
+  {
+    "title": "Gewerbekunden",
+    "path": "",
+    "children": [
+      {
+        "title": "Eigenverbrauch",
+        "path": "gewerbekunden/eigenverbrauch"
+      },
+      {
+        "title": "Klimatisierung",
+        "path": "gewerbekunden/klimatisierung"
+      },
+      {
+        "title": "Notstromversorgung",
+        "path": "gewerbekunden/notstromversorgung"
+      },
+      {
+        "title": "Heizungsunterstützung",
+        "path": "gewerbekunden/heizungsunterstuetzung"
+      }
+    ]
+  }
+]
