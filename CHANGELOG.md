@@ -83,3 +83,10 @@
 ## Designbasis 1.0.5
 
 - Die helle Fassung 1.0.5.1 als Ausgangspunkt für die weitere Gestaltung übernommen.
+
+## Designversion 1.0.6
+
+- Startseitenbeiträge durch Blautöne, Salbei, Sand, Apricot und Flieder stärker voneinander abgesetzt. Breite Beitragsbilder mit weichen Übergängen eingebunden.
+- Umfangreiche Themenseiten und Ratgeber mit anklickbaren Abschnittstiteln und Lesefenstern ausgestattet. Originaltexte und Sprungziele bleiben im statischen HTML.
+- Originaltabelle der Werkstattrechnung mit Projektmotiv und Tabellenrahmen gestaltet.
+- Live-Cookie-Hinweis und Datenschutzhinweis ergänzt. In der Offline-Fassung bleibt die testbare Auswahl verfügbar.

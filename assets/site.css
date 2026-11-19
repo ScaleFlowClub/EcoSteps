@@ -424,3 +424,88 @@ html { background:#e4eef7; }
   .story-contact .story-details { margin-top:0; }
   .story-wide .fl-callout-photo img { min-height:0; }
 }
+
+.story-contact .fl-callout { background:#dceafb; border-color:#b9d2ed; }
+.story-feature .fl-callout { background:#eef7ef; border-color:#cee2d2; }
+.story-wide .fl-callout { background:#e3eef9; border-color:#c9dbef; }
+.story:nth-child(3) .fl-callout { background:#eeebfa; border-color:#dad3ed; }
+.story:nth-child(4) .fl-callout { background:#fff5df; border-color:#eedeb9; }
+.story:nth-child(5) .fl-callout { background:#fbece5; border-color:#efdbd0; }
+.story:nth-child(6) .fl-callout { background:#e5f4f3; border-color:#c6e3df; }
+.story:nth-child(8) .fl-callout { background:#f2eef8; border-color:#e1d7ed; }
+.story:nth-child(9) .fl-callout { background:#ecf3e5; border-color:#d7e3ca; }
+.story-feature .fl-callout-photo img,.story-wide .fl-callout-photo img {
+  mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+}
+
+.reading-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; }
+.reading-list > :not(.reading-card) { grid-column:1/-1; }
+.reading-list > [hidden] { display:none; }
+.reading-card {
+  position:relative; isolation:isolate; border:1px solid var(--line); border-radius:var(--radius);
+  background:#edf5fd; overflow:hidden;
+}
+.reading-card:nth-of-type(4n+3) { background:#e9f2eb; }
+.reading-card img {
+  position:absolute; inset:0 0 0 auto; width:42%; height:100%; object-fit:cover;
+  mask-image:linear-gradient(90deg,transparent,#000 68%); z-index:-1; opacity:.38;
+}
+.reading-list .reading-card h2 { margin:0; font-size:1.15rem; }
+.reading-card button {
+  width:100%; min-height:90px; display:flex; align-items:center; justify-content:space-between;
+  gap:.8rem; padding:.9rem; text-align:left; border:0; background:none;
+  color:#132e50; font-weight:700; line-height:1.28;
+}
+.reading-card button:hover { background:#bfd8f235; }
+.reading-card button:focus-visible { outline-offset:-4px; }
+.reading-arrow { background:#fff; border:1px solid var(--line); border-radius:50%; padding:.4rem .55rem; }
+.reading-dialog {
+  width:min(840px,calc(100% - 1.5rem)); max-height:calc(100dvh - 2rem);
+  border:1px solid var(--line); border-radius:16px; color:var(--ink); background:var(--paper);
+  padding:0; margin:auto; box-shadow:0 20px 75px #132b4f55;
+}
+.reading-dialog::backdrop { background:#132b4fa8; }
+.reading-header {
+  position:sticky; top:0; z-index:2; display:flex; align-items:start; justify-content:space-between;
+  gap:.8rem; padding:1.1rem clamp(1rem,3vw,1.8rem); background:#edf5fd; border-bottom:1px solid var(--line);
+}
+.reading-header h2 { margin:0; font-size:clamp(1.2rem,3vw,1.75rem); }
+.reading-header button {
+  flex:none; width:2.4rem; height:2.4rem; border:1px solid var(--line); border-radius:50%;
+  background:var(--paper); color:var(--dark); font-size:1.5rem; line-height:1;
+}
+.reading-dialog-body { padding:1rem clamp(1rem,3vw,1.8rem) 1.6rem; }
+.reading-dialog-body [id] { scroll-margin-top:6rem; }
+body:has(.reading-dialog[open]) { overflow:hidden; }
+.project-comparison {
+  margin:1.2rem 0; padding:clamp(.75rem,3vw,1.4rem);
+  border:1px solid #c7d9ec; border-radius:14px;
+  background:linear-gradient(100deg,#dbeafa 32%,#dbeafab8 68%,#dbeafa55),
+    url("ecosteps_slider-gewerbe-eigenverbrauch_NEU.jpg") center / cover;
+}
+.project-comparison figcaption { color:#132e50; font-weight:750; margin-bottom:.75rem; }
+.project-table { overflow:auto; background:#ffffffed; border-radius:8px; }
+.project-table table { display:table; width:100%; }
+.project-table :is(td,th) { border-color:#cbdcf0; }
+.project-table tr:nth-child(even) { background:#edf5fd; }
+
+.cookie-notice {
+  position:fixed; z-index:7; left:50%; bottom:.85rem; transform:translateX(-50%);
+  width:min(880px,calc(100% - 1.3rem)); padding:1rem 1.2rem; border:1px solid #98b7d8;
+  border-radius:14px; background:#f5f9ff; box-shadow:0 10px 38px #132b4f35;
+  display:flex; justify-content:space-between; align-items:center; gap:.8rem;
+}
+.cookie-notice[hidden] { display:none; }
+.cookie-notice h2 { margin:0 0 .2rem; font-size:1.1rem; }
+.cookie-notice p { margin:0; font-size:.9rem; }
+.cookie-notice-actions { display:flex; gap:.8rem; align-items:center; font-size:.9rem; }
+.site-frame:has(.cookie-notice:not([hidden])) .fixed-cta { visibility:hidden; }
+@media(max-width:640px) {
+  .reading-list { grid-template-columns:1fr; }
+  .reading-card button { min-height:64px; }
+  .story-feature .fl-callout-photo img,.story-wide .fl-callout-photo img {
+    mask-image:linear-gradient(180deg,#000 78%,transparent 100%);
+  }
+  .cookie-notice { display:block; }
+  .cookie-notice-actions { justify-content:flex-end; margin-top:.55rem; }
+}

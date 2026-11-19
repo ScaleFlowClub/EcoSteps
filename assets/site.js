@@ -160,3 +160,160 @@ if (slideButton) {
     slides[current].hidden = false;
   });
 }
+
+const cookieNotice = document.querySelector('.cookie-notice');
+if (cookieNotice) {
+  const noticeKey = 'ecosteps-cookie-notice';
+  try {
+    cookieNotice.hidden = sessionStorage.getItem(noticeKey) === 'seen';
+  } catch {
+    cookieNotice.hidden = false;
+  }
+  cookieNotice.querySelector('[data-cookie-acknowledge]').addEventListener('click', () => {
+    try {
+      sessionStorage.setItem(noticeKey, 'seen');
+    } catch {
+      // The current page can still dismiss the notice.
+    }
+    cookieNotice.hidden = true;
+  });
+}
+
+function readingSections() {
+  const rows = [...document.querySelectorAll('.detail-grid .archive .fl-builder-content > .fl-row')];
+  if (rows.length) return rows;
+  const article = document.querySelector('[data-reading-sections]');
+  if (!article || article.querySelectorAll(':scope > h2').length < 2) return [];
+  const sections = [];
+  let section;
+  for (const child of [...article.children]) {
+    if (child.matches('h2')) {
+      section = document.createElement('section');
+      article.insertBefore(section, child);
+      sections.push(section);
+    }
+    if (section) section.append(child);
+  }
+  return sections;
+}
+
+const readingRows = readingSections();
+const readingHeadings = readingRows.map(row => row.querySelector('h2, h3'));
+if (typeof HTMLDialogElement !== 'undefined' &&
+    readingHeadings.filter(Boolean).length > 1 &&
+    readingRows.reduce((total, row) => total + row.textContent.trim().length, 0) > 900) {
+  const dialog = document.createElement('dialog');
+  dialog.className = 'reading-dialog';
+  dialog.setAttribute('aria-labelledby', 'reading-title');
+  dialog.innerHTML = `
+    <div class="reading-panel">
+      <div class="reading-header">
+        <h2 id="reading-title"></h2>
+        <button type="button" aria-label="Textfenster schließen" autofocus>×</button>
+      </div>
+      <div class="reading-dialog-body archive prose"></div>
+    </div>`;
+  document.body.append(dialog);
+
+  const body = dialog.querySelector('.reading-dialog-body');
+  const title = dialog.querySelector('#reading-title');
+  const entries = [];
+  let active;
+
+  function restoreSection() {
+    if (!active) return;
+    active.heading.hidden = false;
+    active.card.after(active.row);
+    active.row.hidden = true;
+    active = undefined;
+  }
+
+  function openSection(entry, target) {
+    if (active !== entry) {
+      restoreSection();
+      active = entry;
+      title.textContent = entry.heading.textContent;
+      entry.heading.hidden = true;
+      entry.row.hidden = false;
+      body.append(entry.row);
+      if (!dialog.open) dialog.showModal();
+      dialog.scrollTop = 0;
+    }
+    if (target && target !== entry.row && target !== entry.heading) {
+      target.scrollIntoView({ block: 'start' });
+    }
+    dialog.querySelector('button').focus({ preventScroll: true });
+  }
+
+  readingRows[0].parentElement.classList.add('reading-list');
+  readingRows.forEach((row, index) => {
+    const heading = readingHeadings[index];
+    if (!heading) return;
+    const card = document.createElement('div');
+    card.className = 'reading-card';
+    const label = document.createElement('h2');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-haspopup', 'dialog');
+    const text = document.createElement('span');
+    text.textContent = heading.textContent;
+    const arrow = document.createElement('span');
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '↗';
+    arrow.className = 'reading-arrow';
+    button.append(text, arrow);
+    label.append(button);
+    card.append(label);
+    const photo = [...row.querySelectorAll('img[src]')].find(image => !image.src.endsWith('/pixel.png'));
+    if (photo) {
+      const thumbnail = document.createElement('img');
+      thumbnail.src = photo.src;
+      thumbnail.alt = '';
+      thumbnail.loading = 'lazy';
+      card.prepend(thumbnail);
+    }
+    row.before(card);
+    row.hidden = true;
+    const entry = { row, heading, card, button };
+    entries.push(entry);
+    button.addEventListener('click', () => openSection(entry));
+  });
+
+  function followSection(hash) {
+    let fragment;
+    try {
+      fragment = decodeURIComponent(hash.slice(1));
+    } catch {
+      return false;
+    }
+    const target = fragment && document.getElementById(fragment);
+    const entry = target && entries.find(item => item.row.contains(target));
+    if (!entry) return false;
+    openSection(entry, target);
+    return true;
+  }
+
+  dialog.querySelector('button').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener('close', () => {
+    const previous = active;
+    restoreSection();
+    previous?.button.focus();
+  });
+
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+    const url = new URL(link.href);
+    if (url.origin === location.origin && url.pathname === location.pathname &&
+        url.hash && followSection(url.hash)) {
+      event.preventDefault();
+      history.replaceState(null, '', url.hash);
+    }
+  });
+  window.addEventListener('hashchange', () => followSection(location.hash));
+  if (cookie?.open) cookie.addEventListener('close', () => followSection(location.hash), { once: true });
+  else followSection(location.hash);
+}

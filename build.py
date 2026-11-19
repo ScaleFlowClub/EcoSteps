@@ -60,6 +60,12 @@ def legacy(path):
         html = re.sub(r'(<div class="fl-rich-text">.*?)(<p>\s*</p>)', lambda match: match[1]+videos, html, count=1, flags=re.S)
     if path == 'speicher/eigenverbrauch':
         html = re.sub(r'<div class="fl-video fl-embed-video"[^>]*>\s*</div>', lambda _: videos, html, count=1)
+    if path == 'gewerbekunden/eigenverbrauch':
+        html = re.sub(
+            r'<table\b.*?</table>',
+            lambda match: f'<figure class="project-comparison"><figcaption>Jahresrechnung aus dem Werkstattbeispiel</figcaption><div class="project-table">{match[0]}</div></figure>',
+            html, count=1, flags=re.S
+        )
     return f'<div class="archive">{html}</div>'
 
 def original_media(path):
@@ -369,7 +375,7 @@ for key,p in pages.items():
 if articles:
     layout('energieratgeber','Energieratgeber',intro('Energieratgeber','Antworten rund um Solarstrom, Eigenverbrauch und die Planung Ihrer Anlage.')+'<section class="section wrap cards">'+''.join(card(key+'/index.html',a['title'],a['intro']) for key,a in articles.items())+'</section>')
     for key,a in articles.items():
-        layout(key,a['title'],intro(a['title'],a['intro'],'Energieratgeber')+f'<section class="section wrap prose">{a["html"]}<p>{link("beratung/index.html",cta,"button primary")}</p></section>',a["intro"])
+        layout(key,a['title'],intro(a['title'],a['intro'],'Energieratgeber')+f'<section class="section wrap prose" data-reading-sections>{a["html"]}<p>{link("beratung/index.html",cta,"button primary")}</p></section>',a["intro"])
 if 'datenschutz' in paths:
     for key,title in [('datenschutz','Datenschutzerklärung'),('agb','Allgemeine Geschäftsbedingungen')]:
         layout(key,title,intro(title,'Entwurf zur Freigabe','Rechtliches')+(ROOT/f'content/{key}.html').read_text())
