@@ -114,7 +114,7 @@ for key,p in pages.items():
     if key == 'kontakt':
         body = intro('Kontakt','Schreiben Sie uns eine Nachricht oder rufen Sie uns an.')+f'<section class="section wrap prose">{contact()}<p>{link("beratung/index.html",cta,"button primary")}</p></section>'
     if key == 'beratung' and (ROOT/'content/consultation.html').exists():
-        form = '' if args.live else (ROOT/'content/consultation.html').read_text()
+        form = '' if args.live else (ROOT/'content/consultation.html').read_text().replace('@/datenschutz/index.html', '@/impressum/index.html' if 'datenschutz' not in paths else '@/datenschutz/index.html')
         body = intro('Beratungsgespräch anfragen','Wir klären, welche Lösung zu Ihrem Stromverbrauch, Ihrer Fläche und Ihren Zielen passt.','Energieberatung')+f'''<section class="section wrap consult"><div class="prose"><h2>So bereiten Sie sich vor</h2><ul><li>Jahresstromverbrauch oder letzte Stromabrechnung</li><li>Angaben zu einer vorhandenen PV-Anlage und zum Speicher</li><li>Bei Unternehmen die typischen Betriebs- und Verbrauchszeiten</li></ul><h2>Direkter Kontakt</h2>{contact()}</div>{form}</section>'''
     if key == 'impressum' and (ROOT/'content/legal.html').exists():
         body = intro('Impressum','')+(ROOT/'content/legal.html').read_text()+f'<section class="section wrap prose"><details><summary>Impressum und Datenschutzhinweise der Bestandswebsite</summary>{legacy(key)}</details></section>'

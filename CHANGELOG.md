@@ -16,3 +16,9 @@
 - Fokusdarstellung, aktive Navigation und Layout langer Bestandsinhalte verfeinert.
 - Einen vorhandenen YouTube-Einbettungslink als gekennzeichneten externen Link erhalten.
 - Build und Integrität des Quellarchivs geprüft. Der verwaltete Chromium blockiert file://. Die direkte Offline-Abnahme erfolgt in einem separaten Testbrowser.
+
+## 1.0.4
+
+- Beratungsbutton, Zielgruppenauswahl, Anfrage- und Termindemo ergänzt.
+- Energieratgeber mit fünf Seiten und zwei durchgerechneten Beispielen ergänzt.
+- Build und Integrität des Quellarchivs geprüft.
