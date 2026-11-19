@@ -79,3 +79,7 @@
 - Helle Flächen mit Himmelblau, Weiß und tiefem Blau nach der Designvorlage.
 - Startseitenbeiträge als kompakte Bildkarten, Textkarten und breitere Beiträge gestaltet. Längere Meldungen sind aufklappbar.
 - Themenübersichten, Formulare und Textflächen an die helle Palette angepasst. SEO-Metadaten und URL-Struktur geprüft.
+
+## Designbasis 1.0.5
+
+- Die helle Fassung 1.0.5.1 als Ausgangspunkt für die weitere Gestaltung übernommen.
