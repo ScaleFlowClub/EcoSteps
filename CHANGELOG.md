@@ -52,3 +52,10 @@
 - 17 Themenseiten mit Einleitungen, Links zu verwandten Leistungen und Quellenangaben erschlossen. Historische Texte, Bildmaterial und Downloads bleiben erhalten.
 - Kontaktseite um die Anschrift aus dem Impressum ergänzt.
 - Offline- und Live-Build erstellt. Entpackte Offline-ZIP, Inhaltsnavigation, Sprungmarken und Demo-Funktionen geprüft.
+
+## Designversion 1.0.3
+
+- Neun Original-Teaser der bisherigen Startseite mit Originaltexten, Bildern und Links auf der neuen Startseite eingebunden.
+- 20 zusätzliche Banner- und Sliderdateien von den Originalseiten übernommen. Die zugehörigen Unterseiten zeigen ihre ursprünglichen Motive.
+- Beide YouTube-Videos verlinkt und die ursprünglichen Felder der Kontakt- und Rückrufformulare als Offline-Demos ergänzt.
+- Offline- und Live-Build erstellt. Entpackte ZIP, Medien, Texte und Formularablauf geprüft.

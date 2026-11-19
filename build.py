@@ -32,15 +32,54 @@ def card(path, heading, desc, photo=None):
 def intro(title, copy, eyebrow='EcoSteps'):
     return f'<section class="page-intro"><div class="wrap"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{copy}</p></div></section>'
 
-def legacy(path):
-    p = pages[path]
-    html = p['html']
+def localize_legacy(html):
     def replace(match):
         key = match[1]
         return '@/'+(key+'/index.html' if key else 'index.html') if key in pages else 'https://www.ecosteps-solar.de/'+key
     html = re.sub(r'@@page/([^"\s]*)', replace, html).replace('@@asset/', '@/assets/')
     html = re.sub(r'<img(?![^>]*\balt=)', '<img alt=""', html)
-    return f'<div class="archive">{html}</div>'
+    return html
+
+def legacy(path):
+    return f'<div class="archive">{localize_legacy(pages[path]["html"])}</div>'
+
+def original_media(path):
+    return ''.join(image(name, '') for name in pages[path].get('banners', []))
+
+def original_videos(path):
+    return ''.join(
+        f'<p class="notice"><a href="{escape(url, quote=True)}">{escape(title)}</a> (YouTube, Internetverbindung erforderlich).</p>'
+        for title, url in pages[path].get('videos', [])
+    )
+
+def source_inquiry(path):
+    kind = pages[path].get('inquiry')
+    if not kind:
+        return ''
+    if args.live:
+        return f'<p>{link("beratung/index.html",cta,"button primary")}</p>'
+    fields = [('Ihr Name*','text',True), ('Ihre PLZ*','text',True), ('Ihr Ort*','text',True)]
+    if kind == 'contact':
+        fields += [('Ihre E-Mail-Adresse*','email',True), ('Betreff','text',False), ('Ihre Nachricht','textarea',False)]
+    else:
+        fields += [('E-Mail*','email',True), ('Telefonnummer','tel',False)]
+    controls = []
+    for label, field_type, required in fields:
+        constraint = ' required' if required else ''
+        field = '<textarea rows="4"></textarea>' if field_type == 'textarea' else f'<input type="{field_type}"{constraint}>'
+        controls.append(f'<label>{label}{field}</label>')
+    return f"""
+<section class="form-card legacy-inquiry">
+  <h2>{'Schreiben Sie uns eine Nachricht!' if kind == 'contact' else 'Kontakt aufnehmen'}</h2>
+  <p>Offline-Demo. Ihre Angaben werden nicht übertragen.</p>
+  <form data-legacy-inquiry>
+    <div class="fields">{''.join(controls)}</div>
+    <p><a href="@/datenschutz/index.html">Datenschutzerklärung</a></p>
+    <button class="button primary" type="submit" disabled>Senden</button>
+    <p role="status"></p>
+  </form>
+</section>"""
+
 
 def contact():
     return f'<a href="tel:+4922566209841">{phone}</a><br><a href="mailto:{mail}">{mail}</a>'
@@ -166,7 +205,15 @@ def homepage():
     {link('bestand/startseite/index.html','Bisherige Meldungen und Angebote <span aria-hidden="true">→</span>')}
   </div>
 </section>"""
-    return hero + approach + offering
+    teasers = ''.join(localize_legacy(teaser) for teaser in pages['']['teasers'])
+    original_section = f"""
+<section class="section wrap home-original" id="ecosteps-bestand">
+  <h2>Aktuelles und Angebote von EcoSteps</h2>
+  <p class="notice">Originalbeiträge der bisherigen Website. Preis-, Förder- und Leistungsangaben können zeitgebunden sein.</p>
+  <div class="home-original-media">{original_media('')}</div>
+  <div class="home-original-grid">{teasers}</div>
+</section>"""
+    return hero + approach + offering + original_section
 
 
 topics = json.loads((ROOT / 'content/topics.json').read_text())
@@ -233,9 +280,6 @@ for key,p in pages.items():
         p_title = p['title']
     if key == 'speicher/technik':
         body = re.sub(r'<h2>([^<]*[Ff]lexibl[^<]*)</h2>', r'<h2 id="5">\1</h2>', body, count=1)
-    if key == 'photovoltaik/eigenverbrauch':
-        video = '<p class="notice"><a href="https://www.youtube.com/watch?v=w3wNNmuIyEM">EcoSteps-Video zu Photovoltaik, Speicher und Heizung ansehen</a> (YouTube, Internetverbindung erforderlich).</p>'
-        body = body.replace('<p></p>', video, 1)
     if key == 'gewerbekunden/eigenverbrauch':
         body = body.replace('<div class="archive">','<p class="notice">Die historische Beispielrechnung enthält abweichende Werte: 12.772 kWh Netzbezug zu 0,22 €/kWh ergeben etwa 2.810 € im Jahr. In der Originaltabelle stehen 825 €.</p><div class="archive">',1)
     if key == 'kontakt':
@@ -249,6 +293,14 @@ for key,p in pages.items():
         body = intro('Beratungsgespräch anfragen','Wir klären, welche Lösung zu Ihrem Stromverbrauch, Ihrer Fläche und Ihren Zielen passt.','Energieberatung')+f'''<section class="section wrap consult"><div class="prose"><h2>So bereiten Sie sich vor</h2><ul><li>Jahresstromverbrauch oder letzte Stromabrechnung</li><li>Angaben zu einer vorhandenen PV-Anlage und zum Speicher</li><li>Bei Unternehmen die typischen Betriebs- und Verbrauchszeiten</li></ul><h2>Direkter Kontakt</h2>{contact()}</div>{form}</section>'''
     if key == 'impressum' and (ROOT/'content/legal.html').exists():
         body = intro('Impressum','')+(ROOT/'content/legal.html').read_text()+f'<section class="section wrap prose"><details><summary>Impressum und Datenschutzhinweise der Bestandswebsite</summary>{legacy(key)}</details></section>'
+    media = original_media(key)
+    if media:
+        body = body.replace('</section>', f'<div class="wrap source-banner">{media}</div></section>', 1)
+    extras = original_videos(key)
+    if key != 'beratung':
+        extras += source_inquiry(key)
+    if extras:
+        body += f'<div class="wrap prose source-extras">{extras}</div>'
     layout(key,p_title if key!='beratung' else 'Beratungsgespräch anfragen',body)
 if articles:
     layout('energieratgeber','Energieratgeber',intro('Energieratgeber','Antworten rund um Solarstrom, Eigenverbrauch und die Planung Ihrer Anlage.')+'<section class="section wrap cards">'+''.join(card(key+'/index.html',a['title'],a['intro']) for key,a in articles.items())+'</section>')
@@ -264,7 +316,7 @@ for key,p in source['pages'].items():
         target = key+'/index.html'
     status = p.get('error','Übernommen')
     if not key:
-        target = 'index.html + bestand/startseite/index.html'
+        target = 'index.html#ecosteps-bestand + bestand/startseite/index.html'
     if key == 'beratung':
         status = 'Beratungseinstieg neu; Original unter beratung/beratungsqualität/index.html'
     if key in ('datenschutz','agb','referenzen') and key not in pages:
@@ -274,7 +326,9 @@ for key,p in source['pages'].items():
     rows.append(f"{p['url']}\t{target}\t{status}")
 for url,name,ok in source['media']:
     rows.append(f'{url}\tassets/{name}\t'+('Übernommen' if ok else 'Nicht abrufbar'))
-rows.append('https://www.youtube.com/embed/w3wNNmuIyEM\tphotovoltaik/eigenverbrauch/index.html\tExterner Klicklink; keine lokale Videodatei')
+for key, page in pages.items():
+    for _, url in page.get('videos', []):
+        rows.append(f'{url}\t{key}/index.html\tExterner Klicklink; keine lokale Videodatei')
 (OUT/'URL-Zuordnung.tsv').write_text('\n'.join(rows)+'\n')
 if args.live:
     (OUT/'_redirects').write_text('\n'.join(f'/{key} /{key}/ 301' for key in sorted(paths) if key)+'\n')

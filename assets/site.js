@@ -126,3 +126,11 @@ if (hero && !reducedMotion.matches && !window.matchMedia('(max-width: 760px)').m
     });
   }, { passive: true });
 }
+
+document.querySelectorAll('[data-legacy-inquiry]').forEach(form => {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    form.querySelector('[role=status]').textContent = 'Demo abgeschlossen. Ihre Anfrage wurde nicht übertragen.';
+  });
+  form.querySelector('button[type=submit]').disabled = false;
+});

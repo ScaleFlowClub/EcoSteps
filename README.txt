@@ -1,4 +1,4 @@
-EcoSteps · Offline-Vorschau v1.0.2
+EcoSteps · Offline-Vorschau v1.0.3
 ZIP entpacken und index.html öffnen.
 
 Die Gestaltung, internen Links, Bilder und PDF-Downloads funktionieren lokal.
@@ -27,8 +27,8 @@ Bestandsquellen und Abweichungen (Abruf 19.11.2026)
 - https://www.ecosteps-solar.de/gewerbekunden/eigenverbrauch nennt in der alten Rechnung
   825 EUR für 12.772 kWh zu 0,22 EUR/kWh. Rechnerisch sind es 2.809,84 EUR.
   Die Originalwerte bleiben mit einem Hinweis erhalten.
-- Das EcoSteps-Video unter https://www.youtube.com/watch?v=w3wNNmuIyEM ist als externer
-  Link erhalten. Für lokale Wiedergabe ist eine freigegebene Videodatei erforderlich.
+- Die beiden YouTube-Videos bleiben auf den zugehörigen Seiten verlinkt. Für die
+  Offline-Wiedergabe sind freigegebene Videodateien erforderlich.
 - Das Foto im Einstieg stammt aus dem Bestands-Teaser für Gewerbekunden. Es wird
   auf der Startseite nicht als Nachweis eines bestimmten Projekts bezeichnet.
 

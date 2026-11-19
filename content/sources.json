@@ -28,7 +28,22 @@
         "beratung": "https://www.ecosteps-solar.de/beratung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_home_1.jpg",
+        "ecosteps_slider_home_2.jpg"
+      ],
+      "teasers": [
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/photovoltaik/eigenverbrauch\">Unsere neue Rufnummer für Sie</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p> </p>\n<p><span><strong><span>Wir sind für Sie ab sofort telefonisch erreichbar unter  02256 - 620 98 41.</span></strong></span></p>\n<p> </p>\n<p>Freuen Sie sich auf spannende Neuigkeiten rund um...</p>\n<ul>\n<li>Notstrom - ja. Aber wie am besten?</li>\n<li>Umbau auslaufender EEG-Anlagen auf Eigenverbrauch</li>\n<li>Speichernachrüstung</li>\n<li>dynamische Stromtarife</li>\n<li>rechtzeitige Speichererweiterung vor Modellwechsel</li>\n</ul>\n<p>Und natürlich aktuelle, individuell auf Sie zugeschnittene Photovoltaikanlagen, die ganz auf Ihren persönlichen Nutzen hin optimiert werden.</p>\n</div><a class=\"fl-callout-cta-link\" href=\"@@page/photovoltaik/eigenverbrauch\">mehr...</a> </div>\n</div>\n</div>",
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<div class=\"fl-callout-photo\"><div class=\"fl-photo fl-photo-align-\" itemscope=\"\" itemtype=\"https://schema.org/ImageObject\">\n<div class=\"fl-photo-content fl-photo-img-jpg\">\n<a href=\"@@page/photovoltaik/eigenverbrauch\">\n<img alt=\"ecosteps_slider_photovoltaik-eigenverbrauch\" class=\"fl-photo-img wp-image-363 size-full\" height=\"350\" src=\"@@asset/ecosteps_slider_photovoltaik-eigenverbrauch.jpg\" title=\"ecosteps_slider_photovoltaik-eigenverbrauch\" width=\"1200\"/>\n</a>\n</div>\n</div>\n</div><h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/photovoltaik/eigenverbrauch\">Erfahren, produktneutral, kundenorientiert.</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p data-end=\"232\" data-start=\"46\">Seit 2005 begleiten wir unsere Kunden durch alle Entwicklungen des Solarmarktes. Gute Referenzen und die Weiterempfehlungen unserer zufriedenen Kunden sind die Grundlage unseres Erfolgs.</p>\n<p data-end=\"232\" data-start=\"46\">\n<p data-end=\"232\" data-start=\"46\">Mit über 20 Jahren Erfahrung in der Photovoltaik zählen wir zu den beständigsten Unternehmen der Branche - und das ganz ohne Hochglanzbroschüren.</p>\n<p data-end=\"232\" data-start=\"46\">\n<p data-end=\"232\" data-start=\"46\">Unser Know-how setzen wir ein, um für Sie die Lösung mit dem größten langfristigen Nutzen zu planen – individuell, technisch fundiert und wirtschaftlich durchdacht.</p>\n<p data-end=\"582\" data-start=\"505\">\n<p data-end=\"582\" data-start=\"505\">Keine Fertigpakete. Keine unrealistischen Versprechungen. Kein Verkaufsdruck.</p>\n<p data-end=\"638\" data-start=\"584\">Fragen Sie einfach bei uns an – wir beraten Sie gerne.</p>\n<p> </p>\n</p></p></p></div><a class=\"fl-callout-cta-link\" href=\"@@page/photovoltaik/eigenverbrauch\">mehr...</a> </div>\n</div>\n</div>",
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<div class=\"fl-callout-photo\"><div class=\"fl-photo fl-photo-align-\" itemscope=\"\" itemtype=\"https://schema.org/ImageObject\">\n<div class=\"fl-photo-content fl-photo-img-jpg\">\n<a href=\"@@page/speicher/eigenverbrauch\">\n<img alt=\"ecosteps_640x385-teaser_home-4\" class=\"fl-photo-img wp-image-46 size-full\" height=\"385\" src=\"@@asset/ecosteps_640x385-teaser_home-4.jpg\" title=\"ecosteps_640x385-teaser_home-4\" width=\"640\"/>\n</a>\n</div>\n</div>\n</div><h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/speicher/eigenverbrauch\">Leben ohne STROMKOSTEN</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p>Das funktioniert und macht mächtig Spaß.</p>\n</div><a class=\"fl-callout-cta-link\" href=\"@@page/speicher/eigenverbrauch\">mehr...</a> </div>\n</div>\n</div>",
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<div class=\"fl-callout-photo\"><div class=\"fl-photo fl-photo-align-\" itemscope=\"\" itemtype=\"https://schema.org/ImageObject\">\n<div class=\"fl-photo-content fl-photo-img-jpg\">\n<a href=\"@@page/photovoltaik/produkte\">\n<img alt=\"ecosteps_640x385-teaser_home-sparen\" class=\"fl-photo-img wp-image-496 size-full\" height=\"385\" src=\"@@asset/ecosteps_640x385-teaser_home-sparen.jpg\" title=\"ecosteps_640x385-teaser_home-sparen\" width=\"640\"/>\n</a>\n</div>\n</div>\n</div><h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/photovoltaik/produkte\">Sparen Sie jetzt</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p><span><strong><span>Photovoltaik-Pakete schon ab 4.195 €</span></strong></span></p>\n</div><a class=\"fl-callout-cta-link\" href=\"@@page/photovoltaik/produkte\">mehr...</a> </div>\n</div>\n</div>",
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<div class=\"fl-callout-photo\"><div class=\"fl-photo fl-photo-align-\" itemscope=\"\" itemtype=\"https://schema.org/ImageObject\">\n<div class=\"fl-photo-content fl-photo-img-jpg\">\n<a href=\"@@page/heizung/waerme-erzeugen\">\n<img alt=\"ecosteps_640x385-teaser_home-5\" class=\"fl-photo-img wp-image-47 size-full\" height=\"385\" src=\"@@asset/ecosteps_640x385-teaser_home-5.jpg\" title=\"ecosteps_640x385-teaser_home-5\" width=\"640\"/>\n</a>\n</div>\n</div>\n</div><h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/heizung/waerme-erzeugen\">Gas und Öl sparen</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p>Mit dem Überschuss die Heizung unterstützen.</p>\n</div><a class=\"fl-callout-cta-link\" href=\"@@page/heizung/waerme-erzeugen\">mehr...</a> </div>\n</div>\n</div>",
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<div class=\"fl-callout-photo\"><div class=\"fl-photo fl-photo-align-\" itemscope=\"\" itemtype=\"https://schema.org/ImageObject\">\n<div class=\"fl-photo-content fl-photo-img-jpg\">\n<a href=\"@@page/beratung/foerderung-darlehen\">\n<img alt=\"ecosteps_640x385-teaser_home-darlehen\" class=\"fl-photo-img wp-image-494 size-full\" height=\"385\" src=\"@@asset/ecosteps_640x385-teaser_home-darlehen.jpg\" title=\"ecosteps_640x385-teaser_home-darlehen\" width=\"640\"/>\n</a>\n</div>\n</div>\n</div><h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/beratung/foerderung-darlehen\">FÖRDERUNG &amp; DARLEHEN</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p>Lassen Sie kein Geld auf der Straße liegen.</p>\n</div><a class=\"fl-callout-cta-link\" href=\"@@page/beratung/foerderung-darlehen\">mehr...</a> </div>\n</div>\n</div>",
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<div class=\"fl-callout-photo\"><div class=\"fl-photo fl-photo-align-\" itemscope=\"\" itemtype=\"https://schema.org/ImageObject\">\n<div class=\"fl-photo-content fl-photo-img-jpg\">\n<a href=\"@@page/gewerbekunden/eigenverbrauch\">\n<img alt=\"ecosteps_640x385-teaser_home-gewerbe\" class=\"fl-photo-img wp-image-495 size-full\" height=\"385\" src=\"@@asset/ecosteps_640x385-teaser_home-gewerbe.jpg\" title=\"ecosteps_640x385-teaser_home-gewerbe\" width=\"640\"/>\n</a>\n</div>\n</div>\n</div><h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/gewerbekunden/eigenverbrauch\">Photovoltaik für Gewerbebetriebe</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p>Noch lukrativer als Privatanlagen</p>\n</div><a class=\"fl-callout-cta-link\" href=\"@@page/gewerbekunden/eigenverbrauch\">mehr...</a> </div>\n</div>\n</div>",
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<div class=\"fl-callout-photo\"><div class=\"fl-photo fl-photo-align-\" itemscope=\"\" itemtype=\"https://schema.org/ImageObject\">\n<div class=\"fl-photo-content fl-photo-img-jpg\">\n<a href=\"@@page/photovoltaik/technik\">\n<img alt=\"ecosteps_640x385-teaser_home-6\" class=\"fl-photo-img wp-image-48 size-full\" height=\"385\" src=\"@@asset/ecosteps_640x385-teaser_home-6.jpg\" title=\"ecosteps_640x385-teaser_home-6\" width=\"640\"/>\n</a>\n</div>\n</div>\n</div><h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/photovoltaik/technik\">Ihre KINDER und ENKEL werden Sie dafür lieben.</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p>Zeigen Sie, dass Sie mehr als nur Kohle und Atom können.</p>\n</div><a class=\"fl-callout-cta-link\" href=\"@@page/photovoltaik/technik\">mehr...</a> </div>\n</div>\n</div>",
+        "<div class=\"fl-callout fl-callout-left fl-callout-has-photo fl-callout-photo-above-title\">\n<div class=\"fl-callout-content\">\n<div class=\"fl-callout-photo\"><div class=\"fl-photo fl-photo-align-\" itemscope=\"\" itemtype=\"https://schema.org/ImageObject\">\n<div class=\"fl-photo-content fl-photo-img-jpg\">\n<a href=\"@@page/beratung\">\n<img alt=\"ecosteps_640x385-teaser_home-8\" class=\"fl-photo-img wp-image-280 size-full\" height=\"385\" src=\"@@asset/ecosteps_640x385-teaser_home-81.jpg\" title=\"ecosteps_640x385-teaser_home-8\" width=\"640\"/>\n</a>\n</div>\n</div>\n</div><h3 class=\"fl-callout-title\"><span><a class=\"fl-callout-title-link fl-callout-title-text\" href=\"@@page/beratung\">Werden Sie unser KUNDE</a></span></h3> <div class=\"fl-callout-text-wrap\">\n<div class=\"fl-callout-text\"><p>Wir von ecosteps haben von 2008 bis 2015 fast 1000 Photovoltaikanlagen gebaut</p>\n</div><a class=\"fl-callout-cta-link\" href=\"@@page/beratung\">mehr...</a> </div>\n</div>\n</div>"
+      ]
     },
     "datenschutz": {
       "url": "https://www.ecosteps-solar.de/datenschutz/",
@@ -77,7 +92,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_beratung.jpg"
+      ],
+      "inquiry": "callback"
     },
     "kontakt": {
       "url": "https://www.ecosteps-solar.de/kontakt/",
@@ -106,7 +125,11 @@
         "gewerbekunden/notstromversorgung": "https://www.ecosteps-solar.de/gewerbekunden/notstromversorgung",
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/"
-      }
+      },
+      "banners": [
+        "kontakt-ecosteps_slider_home_1.jpg"
+      ],
+      "inquiry": "contact"
     },
     "gewerbekunden/eigenverbrauch": {
       "url": "https://www.ecosteps-solar.de/gewerbekunden/eigenverbrauch",
@@ -135,7 +158,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider-gewerbe-eigenverbrauch_NEU.jpg"
+      ],
+      "inquiry": "callback"
     },
     "gewerbekunden/heizungsunterstuetzung": {
       "url": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
@@ -164,7 +191,10 @@
         "gewerbekunden/notstromversorgung": "https://www.ecosteps-solar.de/gewerbekunden/notstromversorgung",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider-gewerbe-heizungsunterstuetzung.jpg"
+      ]
     },
     "gewerbekunden/klimatisierung": {
       "url": "https://www.ecosteps-solar.de/gewerbekunden/klimatisierung",
@@ -193,7 +223,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_klimatisierung.jpg"
+      ],
+      "inquiry": "callback"
     },
     "gewerbekunden/notstromversorgung": {
       "url": "https://www.ecosteps-solar.de/gewerbekunden/notstromversorgung",
@@ -222,7 +256,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_gewerbe-notstrom.jpg"
+      ],
+      "inquiry": "callback"
     },
     "beratung/beratungsqualität": {
       "url": "https://www.ecosteps-solar.de/beratung/beratungsqualit%C3%A4t",
@@ -251,7 +289,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_beratung.jpg"
+      ],
+      "inquiry": "callback"
     },
     "service": {
       "url": "https://www.ecosteps-solar.de/service/",
@@ -280,7 +322,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider-service.jpg"
+      ],
+      "inquiry": "callback"
     },
     "impressum": {
       "url": "https://www.ecosteps-solar.de/impressum/",
@@ -309,7 +355,10 @@
         "gewerbekunden/notstromversorgung": "https://www.ecosteps-solar.de/gewerbekunden/notstromversorgung",
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider-technik.jpg"
+      ]
     },
     "heizung/heizungsunterstuetzung": {
       "url": "https://www.ecosteps-solar.de/heizung/heizungsunterstuetzung/",
@@ -338,7 +387,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider-heizungsunterstuetzung.jpg"
+      ],
+      "inquiry": "callback"
     },
     "heizung/warmwasserbereitung": {
       "url": "https://www.ecosteps-solar.de/heizung/warmwasserbereitung",
@@ -367,7 +420,10 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_warmwasser.jpg"
+      ]
     },
     "heizung/waerme-erzeugen": {
       "url": "https://www.ecosteps-solar.de/heizung/waerme-erzeugen/",
@@ -396,7 +452,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_waerme-erzeugen_NEU.jpg"
+      ],
+      "inquiry": "callback"
     },
     "speicher/produkte": {
       "url": "https://www.ecosteps-solar.de/speicher/produkte",
@@ -425,7 +485,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_speicher-produkte.jpg"
+      ],
+      "inquiry": "callback"
     },
     "speicher/technik": {
       "url": "https://www.ecosteps-solar.de/speicher/technik",
@@ -454,7 +518,10 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_speicher-technik.jpg"
+      ]
     },
     "speicher/notstromversorgung": {
       "url": "https://www.ecosteps-solar.de/speicher/notstromversorgung",
@@ -483,7 +550,10 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_speicher-notstrom.jpg"
+      ]
     },
     "speicher/eigenverbrauch": {
       "url": "https://www.ecosteps-solar.de/speicher/eigenverbrauch/",
@@ -512,7 +582,17 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_speicher-eigenverbrauch1.jpg"
+      ],
+      "videos": [
+        [
+          "Video zum Eigenverbrauch mit Stromspeicher",
+          "https://www.youtube.com/watch?v=Tu7h_mFJhCY"
+        ]
+      ],
+      "inquiry": "callback"
     },
     "photovoltaik/produkte": {
       "url": "https://www.ecosteps-solar.de/photovoltaik/produkte",
@@ -541,7 +621,10 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider-produkte.jpg"
+      ]
     },
     "photovoltaik/technik": {
       "url": "https://www.ecosteps-solar.de/photovoltaik/technik/",
@@ -570,7 +653,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_photovoltaik-technik.jpg"
+      ],
+      "inquiry": "callback"
     },
     "photovoltaik/standort": {
       "url": "https://www.ecosteps-solar.de/photovoltaik/standort/",
@@ -599,7 +686,10 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_photovoltaik-standort.jpg"
+      ]
     },
     "photovoltaik/eigenverbrauch": {
       "url": "https://www.ecosteps-solar.de/photovoltaik/eigenverbrauch/",
@@ -628,7 +718,17 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_photovoltaik-eigenverbrauch.jpg"
+      ],
+      "videos": [
+        [
+          "ecosteps solar Erftstadt - Photovoltaik Speicher Heizung Wärme Energie",
+          "https://www.youtube.com/watch?v=w3wNNmuIyEM"
+        ]
+      ],
+      "inquiry": "callback"
     },
     "beratung": {
       "url": "https://www.ecosteps-solar.de/beratung/beratungsqualit%C3%A4t",
@@ -657,7 +757,11 @@
         "gewerbekunden/heizungsunterstuetzung": "https://www.ecosteps-solar.de/gewerbekunden/heizungsunterstuetzung/",
         "impressum": "https://www.ecosteps-solar.de/impressum/",
         "kontakt": "https://www.ecosteps-solar.de/kontakt/"
-      }
+      },
+      "banners": [
+        "ecosteps_slider_beratung.jpg"
+      ],
+      "inquiry": "callback"
     }
   },
   "media": [
@@ -959,6 +1063,106 @@
     [
       "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/EhepBerufst_Ueberschuss-2.jpg",
       "EhepBerufst_Ueberschuss-2.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/themes/ecosteps/images/ecosteps_slider_home_1.jpg",
+      "kontakt-ecosteps_slider_home_1.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider-gewerbe-eigenverbrauch_NEU.jpg",
+      "ecosteps_slider-gewerbe-eigenverbrauch_NEU.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider-heizungsunterstuetzung.jpg",
+      "ecosteps_slider-heizungsunterstuetzung.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider-produkte.jpg",
+      "ecosteps_slider-produkte.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider-technik.jpg",
+      "ecosteps_slider-technik.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_home_1.jpg",
+      "ecosteps_slider_home_1.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_home_2.jpg",
+      "ecosteps_slider_home_2.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_photovoltaik-standort.jpg",
+      "ecosteps_slider_photovoltaik-standort.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_photovoltaik-technik.jpg",
+      "ecosteps_slider_photovoltaik-technik.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_speicher-eigenverbrauch1.jpg",
+      "ecosteps_slider_speicher-eigenverbrauch1.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_speicher-notstrom.jpg",
+      "ecosteps_slider_speicher-notstrom.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_speicher-technik.jpg",
+      "ecosteps_slider_speicher-technik.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_waerme-erzeugen_NEU.jpg",
+      "ecosteps_slider_waerme-erzeugen_NEU.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/07/ecosteps_slider_warmwasser.jpg",
+      "ecosteps_slider_warmwasser.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/08/ecosteps_slider-gewerbe-heizungsunterstuetzung.jpg",
+      "ecosteps_slider-gewerbe-heizungsunterstuetzung.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/08/ecosteps_slider-service.jpg",
+      "ecosteps_slider-service.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/08/ecosteps_slider_beratung.jpg",
+      "ecosteps_slider_beratung.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/08/ecosteps_slider_gewerbe-notstrom.jpg",
+      "ecosteps_slider_gewerbe-notstrom.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/08/ecosteps_slider_klimatisierung.jpg",
+      "ecosteps_slider_klimatisierung.jpg",
+      true
+    ],
+    [
+      "https://www.ecosteps-solar.de/wp-content/uploads/2015/08/ecosteps_slider_speicher-produkte.jpg",
+      "ecosteps_slider_speicher-produkte.jpg",
       true
     ]
   ]
