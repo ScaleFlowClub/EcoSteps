@@ -44,3 +44,11 @@
 - Startseite mit großformatigem Bestandsfoto, neuem Typografiesystem, drei unterschiedlich gestalteten Kacheln und verlinkter Leistungsliste neu aufgebaut.
 - EcoSteps-Palette und Originalmedien verwendet. Schrift lokal eingebunden.
 - Offline- und Live-Build erstellt. Navigation, Medien und Demo-Funktionen aus der entpackten ZIP geprüft.
+
+## Designversion 1.0.2
+
+- Bestandswebsite erneut abgeglichen. Die Texte der 21 öffentlich gelisteten Seiten und des Beratungseinstiegs entsprechen dem gespeicherten Bestand. Alle 60 erfassten Mediendateien waren abrufbar.
+- Leistungsübersicht nach Photovoltaik, Stromspeicher, Wärme, Gewerbe, Beratung und Anlagenservice gegliedert.
+- 17 Themenseiten mit Einleitungen, Links zu verwandten Leistungen und Quellenangaben erschlossen. Historische Texte, Bildmaterial und Downloads bleiben erhalten.
+- Kontaktseite um die Anschrift aus dem Impressum ergänzt.
+- Offline- und Live-Build erstellt. Entpackte Offline-ZIP, Inhaltsnavigation, Sprungmarken und Demo-Funktionen geprüft.

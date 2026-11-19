@@ -169,7 +169,7 @@ def homepage():
     return hero + approach + offering
 
 
-categories = {'photovoltaik':'Photovoltaik','speicher':'Stromspeicher','heizung':'Heizung','gewerbekunden':'Für Unternehmen','beratung':'Energieberatung'}
+topics = json.loads((ROOT / 'content/topics.json').read_text())
 paths = set(pages) | {'leistungen','bestand/startseite','referenzen'}
 if articles:
     paths |= {'energieratgeber',*articles}
@@ -178,19 +178,59 @@ if (ROOT / 'content/cookies.html').exists():
 shutil.copytree(ROOT / 'assets', OUT / 'assets', dirs_exist_ok=True)
 layout('', 'Solarstrom für Privathaushalte und Unternehmen', homepage())
 layout('bestand/startseite','Inhalte der bisherigen Startseite',intro('Bisherige Startseite','Die folgenden Meldungen und Angebote stammen von der Bestandswebsite. Preis- und Leistungsangaben können zeitgebunden sein.','Bestandsinhalte')+f'<section class="section wrap prose">{legacy("")}</section>')
-sections = ''
-for category, label in categories.items():
-    entries = [(k,p) for k,p in pages.items() if k.startswith(category+'/')]
-    if entries:
-        sections += f'<h2>{label}</h2><ul>'+''.join(f'<li>{link(k+"/index.html",escape(p["title"].split(" - ")[-1]))}</li>' for k,p in entries)+'</ul>'
+def topic_links(category, current=None):
+    entries = topics[category]['pages']
+    items = []
+    for slug, (title, description) in entries.items():
+        key = f'{category}/{slug}'
+        if key not in pages or key == current:
+            continue
+        items.append(f'<li>{link(key+"/index.html", f"<strong>{title}</strong><span>{description}</span><span class=service-arrow aria-hidden=true>→</span>")}</li>')
+    return '<ul class="service-list">'+''.join(items)+'</ul>'
+
+overview = []
+for category, topic in topics.items():
+    overview.append(f"""
+<section class="topic-area" id="{category}">
+  <div>{image(*topic['photo'])}<h2>{topic['title']}</h2><p>{topic['intro']}</p></div>
+  {topic_links(category)}
+</section>""")
+overview_nav = ''.join(f'<a href="#{key}">{item["title"]}</a>' for key,item in topics.items())
+overview_nav += '<a href="#anlagenservice">Anlagenservice</a>'
 layout('referenzen','Referenzen',intro('Referenzen','Beispiele aus der bisherigen EcoSteps-Website.')+'<section class="section wrap cards two">'+card('gewerbekunden/eigenverbrauch/index.html','Kfz-Werkstatt','Historisches Anlagenbeispiel mit Leistungsprofil und Jahreswerten.',('werkstatt.jpg','Arbeit in einer Kfz-Werkstatt, Motiv der Bestandsseite'))+card('photovoltaik/eigenverbrauch/index.html#4','Kundenanlagen','Historische Beispiele für Eigenverbrauch in Privathaushalten.')+'</section>')
-layout('leistungen','Leistungen',intro('Unsere Leistungen','Photovoltaik, Speicher, Wärme und Anlagenservice.')+f'<section class="section wrap prose">{sections}<h2>Anlagenservice</h2>{link("service/index.html","Zum Anlagenservice →","text-link")}</section>')
+layout('leistungen','Leistungen',intro('Unsere Leistungen','Photovoltaik, Speicher, Wärme und Anlagenservice.')+f"""
+<div class="wrap topic-overview">
+  <nav class="topic-index" aria-label="Leistungsbereiche">{overview_nav}</nav>
+  {''.join(overview)}
+  <section class="topic-area topic-service" id="anlagenservice">
+    <div><h2>Anlagenservice</h2><p>Erträge überwachen und schleichende Leistungseinbußen früh erkennen.</p></div>
+    {link('service/index.html','Zum Anlagenservice →','text-link')}
+  </section>
+</div>""")
 for key,p in pages.items():
     if not key: continue
     title = escape(p['title'])
     body = intro(title,'','Bestandsinhalte')+f'<section class="section wrap prose">{legacy(key)}</section>'
-    if key.startswith(('photovoltaik/','speicher/','heizung/','gewerbekunden/','beratung/')):
-        body = body.replace('<div class="archive">','<p class="notice">Bestandsinhalt. Angaben zu Preisen, Produkten, Vergütung und Förderung können zeitgebunden sein.</p><div class="archive">',1)
+    category, _, slug = key.partition('/')
+    if category in topics and slug in topics[category]['pages']:
+        topic = topics[category]
+        label, description = topic['pages'][slug]
+        overview_link = link(f'leistungen/index.html#{category}',topic['title'],'text-link')
+        body = intro(label,description,overview_link)+f'''
+<section class="section wrap detail-grid">
+  <article class="prose">
+    <p class="notice">Bestandsinhalt. Angaben zu Preisen, Produkten, Vergütung und Förderung können zeitgebunden sein.</p>
+    {legacy(key)}
+    <p class="source-note">Quelle: <a href="{escape(p['url'], quote=True)}">EcoSteps-Bestandswebsite</a></p>
+  </article>
+  <aside class="detail-related" aria-label="Verwandte Seiten">
+    <h2>Weitere Themen</h2>{topic_links(category,key)}
+    <p>{link('beratung/index.html',cta,'button primary')}</p>
+  </aside>
+</section>'''
+        p_title = label
+    else:
+        p_title = p['title']
     if key == 'speicher/technik':
         body = re.sub(r'<h2>([^<]*[Ff]lexibl[^<]*)</h2>', r'<h2 id="5">\1</h2>', body, count=1)
     if key == 'photovoltaik/eigenverbrauch':
@@ -199,13 +239,17 @@ for key,p in pages.items():
     if key == 'gewerbekunden/eigenverbrauch':
         body = body.replace('<div class="archive">','<p class="notice">Die historische Beispielrechnung enthält abweichende Werte: 12.772 kWh Netzbezug zu 0,22 €/kWh ergeben etwa 2.810 € im Jahr. In der Originaltabelle stehen 825 €.</p><div class="archive">',1)
     if key == 'kontakt':
-        body = intro('Kontakt','Schreiben Sie uns eine Nachricht oder rufen Sie uns an.')+f'<section class="section wrap prose">{contact()}<p>{link("beratung/index.html",cta,"button primary")}</p></section>'
+        body = intro('Kontakt','Schreiben Sie uns eine Nachricht oder rufen Sie uns an.')+f'''
+<section class="section wrap consult">
+  <div class="prose"><h2>Telefon und E-Mail</h2><p>{contact()}</p>{link('beratung/index.html',cta,'button primary')}</div>
+  <div class="form-card"><h2>Anschrift</h2><address>ecosteps GmbH &amp; Co. KG<br>Virnicher Str. 8<br>53894 Mechernich</address></div>
+</section>'''
     if key == 'beratung' and (ROOT/'content/consultation.html').exists():
         form = '' if args.live else (ROOT/'content/consultation.html').read_text().replace('@/datenschutz/index.html', '@/impressum/index.html' if 'datenschutz' not in paths else '@/datenschutz/index.html')
         body = intro('Beratungsgespräch anfragen','Wir klären, welche Lösung zu Ihrem Stromverbrauch, Ihrer Fläche und Ihren Zielen passt.','Energieberatung')+f'''<section class="section wrap consult"><div class="prose"><h2>So bereiten Sie sich vor</h2><ul><li>Jahresstromverbrauch oder letzte Stromabrechnung</li><li>Angaben zu einer vorhandenen PV-Anlage und zum Speicher</li><li>Bei Unternehmen die typischen Betriebs- und Verbrauchszeiten</li></ul><h2>Direkter Kontakt</h2>{contact()}</div>{form}</section>'''
     if key == 'impressum' and (ROOT/'content/legal.html').exists():
         body = intro('Impressum','')+(ROOT/'content/legal.html').read_text()+f'<section class="section wrap prose"><details><summary>Impressum und Datenschutzhinweise der Bestandswebsite</summary>{legacy(key)}</details></section>'
-    layout(key,p['title'] if key!='beratung' else 'Beratungsgespräch anfragen',body)
+    layout(key,p_title if key!='beratung' else 'Beratungsgespräch anfragen',body)
 if articles:
     layout('energieratgeber','Energieratgeber',intro('Energieratgeber','Antworten rund um Solarstrom, Eigenverbrauch und die Planung Ihrer Anlage.')+'<section class="section wrap cards">'+''.join(card(key+'/index.html',a['title'],a['intro']) for key,a in articles.items())+'</section>')
     for key,a in articles.items():

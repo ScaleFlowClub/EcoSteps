@@ -1,0 +1,54 @@
+{
+  "photovoltaik": {
+    "title": "Photovoltaik",
+    "intro": "Vom geeigneten Dach bis zur Auswahl der Komponenten. Hier finden Sie die Grundlagen zur Planung Ihrer Anlage.",
+    "photo": ["ecosteps_640x385-teaser_home-gewerbe.jpg", "Solarmodule auf Gewerbedächern"],
+    "pages": {
+      "eigenverbrauch": ["Eigenverbrauch", "Wie Sie Solarstrom direkt nutzen und Ihren Netzbezug reduzieren."],
+      "standort": ["Standort und Dach", "Welche Rolle Dachform, Ausrichtung und Standort bei der Planung spielen."],
+      "technik": ["Module und Wechselrichter", "Wie Module, Wechselrichter und Unterkonstruktion zusammenspielen."],
+      "produkte": ["Produkte und Hersteller", "Welche Komponenten EcoSteps auf der Bestandsseite vorstellt."]
+    }
+  },
+  "speicher": {
+    "title": "Stromspeicher",
+    "intro": "Überschüsse für später speichern. Informieren Sie sich über Eigenverbrauch, Notstrom und Speichertechnik.",
+    "photo": ["ecosteps_640x385-teaser_home-4.jpg", "Zwei Menschen genießen die Sonne"],
+    "pages": {
+      "eigenverbrauch": ["Solarstrom speichern", "Wie sich die Nutzung des eigenen Solarstroms über den Tag verteilen lässt."],
+      "notstromversorgung": ["Notstromversorgung", "Welche Art der Versorgung bei einem Stromausfall infrage kommt."],
+      "technik": ["Speichertechnik", "Wie Akkus, Wechselrichter und Netzanbindung zusammenspielen."],
+      "produkte": ["Speicher und Datenblätter", "Historische Produktbeispiele mit den zugehörigen Unterlagen."]
+    }
+  },
+  "heizung": {
+    "title": "Wärme mit Solarstrom",
+    "intro": "Solarstrom kann auch zur Wärmeversorgung beitragen. Die passende Lösung hängt vom Gebäude und der vorhandenen Heizung ab.",
+    "photo": ["ecosteps_640x385-teaser_home-5.jpg", "Motiv der EcoSteps-Bestandsseite zu Solarstrom und Wärme"],
+    "pages": {
+      "waerme-erzeugen": ["Wärme erzeugen", "Wie sich überschüssiger Solarstrom in Wärme umwandeln lässt."],
+      "warmwasserbereitung": ["Warmwasserbereitung", "Wie ein Teil der PV-Erzeugung für Warmwasser genutzt werden kann."],
+      "heizungsunterstuetzung": ["Heizungsunterstützung", "Wie Solarstrom die vorhandene Wärmeerzeugung ergänzen kann."]
+    }
+  },
+  "gewerbekunden": {
+    "title": "Photovoltaik für Unternehmen",
+    "intro": "Wie gut eine PV-Anlage zum Betrieb passt, hängt unter anderem von Strombedarf, Betriebszeiten und nutzbarer Fläche ab.",
+    "photo": ["werkstatt.jpg", "Arbeit in einer Kfz-Werkstatt"],
+    "pages": {
+      "eigenverbrauch": ["Eigenverbrauch im Betrieb", "Anlagenplanung nach Lastprofil und ein historisches Werkstattbeispiel."],
+      "klimatisierung": ["Klimatisierung", "Wie sich Solarstrom und der Kühlbedarf eines Betriebs ergänzen können."],
+      "notstromversorgung": ["Notstrom im Betrieb", "Welche Verbraucher bei einem Netzausfall weiter versorgt werden sollen."],
+      "heizungsunterstuetzung": ["Heizungsunterstützung im Betrieb", "Wie sich Solarstrom für betriebliche Wärmeanwendungen nutzen lässt."]
+    }
+  },
+  "beratung": {
+    "title": "Energieberatung",
+    "intro": "Von der ersten Einordnung bis zu Fragen zur Finanzierung. EcoSteps plant anhand Ihres Gebäudes und Verbrauchs.",
+    "photo": ["ecosteps_640x385-teaser_home-81.jpg", "Motiv aus der EcoSteps-Bestandsseite zur Beratung"],
+    "pages": {
+      "beratungsqualität": ["Beratungsqualität", "Wie EcoSteps die Planung und Beratung für seine Kunden beschreibt."],
+      "foerderung-darlehen": ["Förderung und Darlehen", "Was die Bestandsseite zur Finanzierung von Anlage und Speicher erläutert."]
+    }
+  }
+}

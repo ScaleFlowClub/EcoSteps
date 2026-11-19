@@ -117,3 +117,23 @@
   .feature-photo { min-height: 235px; }
   .guide-grid { display: block; }
 }
+
+.topic-index { display:flex; flex-wrap:wrap; gap:.5rem; padding-block:1.3rem; border-bottom:1px solid var(--line); }
+.topic-index a { border:1px solid var(--line); border-radius:2rem; padding:.35rem .8rem; font-weight:650; text-decoration:none; }
+.topic-index a:hover { background:var(--warm); }
+.topic-area { display:grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap:clamp(1.4rem, 6vw, 5.7rem); padding-block:clamp(2rem,6vw,5rem); border-bottom:1px solid var(--line); scroll-margin-top:1rem; }
+.topic-area img { width:100%; aspect-ratio:2; object-fit:cover; border-radius:var(--radius); margin-bottom:1.2rem; }
+.topic-area h2 { margin-bottom:.65rem; }
+.topic-service { border-bottom:0; }
+.detail-grid { display:grid; grid-template-columns:minmax(0, 1fr) minmax(230px, 310px); gap:clamp(1.5rem, 5vw, 4rem); align-items:start; }
+.detail-related { padding:1.25rem; background:var(--warm); border-radius:var(--radius); }
+.detail-related h2 { font-size:1.45rem; margin-bottom:1rem; }
+.detail-related .service-list strong { font-size:1rem; }
+.detail-related .service-list a { padding-block:.7rem; font-size:.9rem; line-height:1.4; }
+.detail-related .service-arrow { width:1.65rem; }
+.detail-related p { margin:1rem 0 0; }
+.detail-related .button { font-size:.9rem; }
+.source-note { font-size:.9rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.8rem; margin-top:2rem; }
+@media (max-width: 760px) {
+  .topic-area, .detail-grid { grid-template-columns:1fr; }
+}
