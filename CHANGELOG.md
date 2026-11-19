@@ -34,3 +34,7 @@
 - Dezente Bild- und Kartenanimationen sowie eine Desktop-Parallaxe ergänzt. Reduzierte Bewegung wird berücksichtigt.
 - Offline- und Live-Build geprüft. In Chromium Headless alle 33 Seiten aus dem entpackten ZIP über file:// bei deaktiviertem Netzwerk geöffnet. Lokale Links, Sprungmarken, Bilddateien, Mobilmenü per Tastatur, Beratungsbutton, Formularvalidierung, Termindemo und Cookie-Einstellungen geprüft.
 - Versionsarchiv geprüft und eine separate datierte Quellsicherung erstellt.
+
+## Designversion 1.0.0
+
+- Die geprüfte Relaunch-Fassung v1.0.6 als Ausgangspunkt der Designreihe gesichert.
