@@ -22,3 +22,9 @@
 - Beratungsbutton, Zielgruppenauswahl, Anfrage- und Termindemo ergänzt.
 - Energieratgeber mit fünf Seiten und zwei durchgerechneten Beispielen ergänzt.
 - Build und Integrität des Quellarchivs geprüft.
+
+## 1.0.5
+
+- Impressum anhand des Bestands aufbereitet. Datenschutz und AGB als Freigabeentwürfe ergänzt.
+- Cookie-Demo mit gleichwertigen Optionen, Änderungsmöglichkeit und Speicherung ergänzt. Live-Fassung verwendet keine optionalen Dienste und zeigt keinen automatischen Banner.
+- Build und Integrität des Quellarchivs geprüft.

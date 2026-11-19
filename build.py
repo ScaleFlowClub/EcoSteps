@@ -57,7 +57,8 @@ def layout(path, title, body):
     consultation = 'beratung/index.html' if 'beratung' in paths else 'kontakt/index.html'
     cookies = '<button type="button" data-cookie-settings>Cookie-Einstellungen</button>' if 'datenschutz' in paths else ''
     floating = link(consultation,cta+' <span aria-hidden="true">↗</span>','fixed-cta') if articles else ''
-    banner = (ROOT / 'content/cookies.html').read_text() if cookies and not args.live else ''
+    cookie_file = 'cookies-live.html' if args.live else 'cookies.html'
+    banner = (ROOT / 'content' / cookie_file).read_text() if cookies else ''
     doc = f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)} · EcoSteps</title><link rel="stylesheet" href="@/assets/site.css"><script src="@/assets/site.js" defer></script></head>
@@ -129,9 +130,19 @@ if 'datenschutz' in paths:
 rows=['Quell-URL\tOffline-Ziel\tStatus']
 for key,p in source['pages'].items():
     target = ('bestand/startseite/index.html' if not key else key+'/index.html') if key in pages else '—'
-    rows.append(f"{p['url']}\t{target}\t{p.get('error','Übernommen')}")
+    if key in paths and key not in pages:
+        target = key+'/index.html'
+    status = p.get('error','Übernommen')
+    if not key:
+        target = 'index.html + bestand/startseite/index.html'
+    if key == 'beratung':
+        status = 'Beratungseinstieg neu; Original unter beratung/beratungsqualität/index.html'
+    if key == 'kontakt':
+        status = 'Kontaktwege übernommen; Kartenadresse abweichend, Karte ausgelassen'
+    rows.append(f"{p['url']}\t{target}\t{status}")
 for url,name,ok in source['media']:
     rows.append(f'{url}\tassets/{name}\t'+('Übernommen' if ok else 'Nicht abrufbar'))
+rows.append('https://www.youtube.com/embed/w3wNNmuIyEM\tphotovoltaik/eigenverbrauch/index.html\tExterner Klicklink; keine lokale Videodatei')
 (OUT/'URL-Zuordnung.tsv').write_text('\n'.join(rows)+'\n')
 if args.live:
     (OUT/'_redirects').write_text('\n'.join(f'/{key} /{key}/ 301' for key in sorted(paths) if key)+'\n')

@@ -1,0 +1,13 @@
+<dialog class="cookie" aria-labelledby="cookie-title">
+  <h2 id="cookie-title">Cookie-Einstellungen</h2>
+  <p>Offline-Demo. Ihre Auswahl wird lokal gespeichert. Statistik und andere optionale Dienste bleiben in der Vorschau deaktiviert.</p>
+  <div class="cookie-actions">
+    <button class="button secondary" type="button" data-consent="all">Alle akzeptieren</button>
+    <button class="button secondary" type="button" data-consent="no">Optionale ablehnen</button>
+    <button class="button secondary" type="button" data-cookie-details aria-expanded="false" aria-controls="cookie-details">Einstellungen</button>
+  </div>
+  <div id="cookie-details" hidden>
+    <label><input id="demo-statistics" type="checkbox"> Optionale Statistik (Demo)</label>
+    <button class="button primary" type="button" data-cookie-save>Auswahl speichern</button>
+  </div>
+</dialog>
