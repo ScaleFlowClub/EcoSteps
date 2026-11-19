@@ -1,0 +1,21 @@
+{
+  "photovoltaik/eigenverbrauch": ["Direktverbrauch", "Einspeisung", "Netzbezug"],
+  "photovoltaik/standort": ["Ausrichtung", "Verschattung", "Dachfläche"],
+  "photovoltaik/technik": ["Solarmodule", "Wechselrichter", "Unterkonstruktion"],
+  "photovoltaik/produkte": ["Module", "Wechselrichter", "Montagesysteme"],
+  "speicher/eigenverbrauch": ["Solarstrom am Tag", "Überschuss speichern", "Abends Strom nutzen"],
+  "speicher/notstromversorgung": ["Netzausfall", "Ersatzstrom", "Priorisierte Verbraucher"],
+  "speicher/technik": ["Batterie", "Wechselrichter", "Netzanbindung"],
+  "speicher/produkte": ["Speicherbeispiele", "Systemvergleich", "Datenblätter"],
+  "heizung/waerme-erzeugen": ["PV-Überschuss", "Wärmeerzeugung", "Eigenverbrauch"],
+  "heizung/warmwasserbereitung": ["Warmwasserbedarf", "Solar-Heizstab", "Wärmepumpe"],
+  "heizung/heizungsunterstuetzung": ["Bestehende Heizung", "Solarer Überschuss", "Wärmebedarf"],
+  "gewerbekunden/eigenverbrauch": ["Lastprofil", "Betriebszeiten", "Solarer Deckungsanteil"],
+  "gewerbekunden/klimatisierung": ["Kühlbedarf", "PV-Erzeugung", "Verbrauch am Tag"],
+  "gewerbekunden/notstromversorgung": ["Wichtige Verbraucher", "Netztrennung", "Versorgung im Ausfall"],
+  "gewerbekunden/heizungsunterstuetzung": ["Betrieblicher Wärmebedarf", "Solarstrom", "Heiztechnik"],
+  "beratung/beratungsqualität": ["Stromverbrauch", "Gebäude", "Individuelle Planung"],
+  "beratung/foerderung-darlehen": ["Investition", "Fördermöglichkeiten", "Finanzierung"],
+  "beratung": ["Stromrechnung", "Vorhandene Anlage", "Betriebszeiten"],
+  "service": ["Erträge kontrollieren", "Leistungseinbußen erkennen", "Anlage betreuen"]
+}

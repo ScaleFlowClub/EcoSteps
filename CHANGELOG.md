@@ -66,3 +66,10 @@
 - Startseite mit Originalslider und den neun Beiträgen in Originalreihenfolge aufgebaut. Videos und Formulare stehen auf den Themenseiten wieder an ihrer ursprünglichen Stelle.
 - Dunkle Grauflächen mit den Originalmarkenfarben Grün (#94c11c), Orange (#fbb331) und Grau (#5a666b) gestaltet.
 - Desktop- und Mobilnavigation, Tastaturbedienung, Bildwechsel und Offline-ZIP geprüft.
+
+## Designversion 1.0.5
+
+- Kleinere Versalüberschriften, abwechslungsreiche Kacheln, lokale Bildbänder, Icons und einen Seitenrahmen mit höchstens 1440 px umgesetzt.
+- Leistungseinstiege und 19 visuelle Themenübersichten ergänzt. Originalinhalte bleiben im bisherigen Seitenablauf erreichbar.
+- Energieberatung in Navigation und Seitentiteln verwendet. Meta-Beschreibungen, Canonicals, Organisationsdaten und Live-Sitemap ergänzt. SEO-Regeln für Folgeänderungen im Projekt dokumentiert.
+- Offline-ZIP sowie Desktop und Mobilansicht geprüft. Live-Metadaten mit der konfigurierten Domain abgeglichen.

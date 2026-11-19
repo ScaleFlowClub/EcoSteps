@@ -1,4 +1,4 @@
-EcoSteps · Offline-Vorschau v1.0.4
+EcoSteps · Offline-Vorschau v1.0.5
 ZIP entpacken und index.html öffnen.
 
 Die Gestaltung, internen Links, Bilder und PDF-Downloads funktionieren lokal.
@@ -49,3 +49,9 @@ Vor Veröffentlichung
   Live-Build die direkten Kontaktwege zur Verfügung.
 - Live-Weiterleitungen in dist/live/_redirects auf Eignung für das gewählte Hosting
   prüfen. Bestehende Schrägstrich-Pfade sollten direkt weiter funktionieren.
+
+SEO im Live-Build
+Standard-Domain für Canonicals, Sitemap und robots.txt: https://www.ecosteps-solar.de
+Bei anderer Zieldomain: python3 build.py --live --site-url https://www.beispiel.de
+Vor dem Livegang die tatsächliche Domain und die ausgelieferten URLs prüfen.
+Die Offline-Vorschau und das Archiv tragen noindex.
