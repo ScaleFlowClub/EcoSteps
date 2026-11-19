@@ -51,6 +51,8 @@ def layout(path, title, body):
     prefix = '../' * depth or './'
     nav = [('leistungen/index.html','Leistungen'),('energieratgeber/index.html','Energieratgeber'),('kontakt/index.html','Kontakt')]
     links = ''.join(link(url,label) for url,label in nav if url.split('/')[0] in paths)
+    active = path.split('/')[0]
+    links = links.replace(f'href="@/{active}/index.html"', f'href="@/{active}/index.html" aria-current="page"') if active in ('leistungen','energieratgeber','kontakt') else links
     legal = ''.join(link(k+'/index.html',label) for k,label in [('impressum','Impressum'),('datenschutz','Datenschutz'),('agb','AGB')] if k in paths)
     consultation = 'beratung/index.html' if 'beratung' in paths else 'kontakt/index.html'
     cookies = '<button type="button" data-cookie-settings>Cookie-Einstellungen</button>' if 'datenschutz' in paths else ''
@@ -104,6 +106,9 @@ for key,p in pages.items():
     body = intro(title,'','Bestandsinhalte')+f'<section class="section wrap prose">{legacy(key)}</section>'
     if key.startswith(('photovoltaik/','speicher/','heizung/','gewerbekunden/','beratung/')):
         body = body.replace('<div class="archive">','<p class="notice">Bestandsinhalt. Angaben zu Preisen, Produkten, Vergütung und Förderung können zeitgebunden sein.</p><div class="archive">',1)
+    if key == 'photovoltaik/eigenverbrauch':
+        video = '<p class="notice"><a href="https://www.youtube.com/watch?v=w3wNNmuIyEM">EcoSteps-Video zu Photovoltaik, Speicher und Heizung ansehen</a> (YouTube, Internetverbindung erforderlich).</p>'
+        body = body.replace('<p></p>', video, 1)
     if key == 'gewerbekunden/eigenverbrauch':
         body = body.replace('<div class="archive">','<p class="notice">Die historische Beispielrechnung enthält abweichende Werte: 12.772 kWh Netzbezug zu 0,22 €/kWh ergeben etwa 2.810 € im Jahr. In der Originaltabelle stehen 825 €.</p><div class="archive">',1)
     if key == 'kontakt':
