@@ -1,4 +1,4 @@
-EcoSteps · Offline-Vorschau v1.0.5
+EcoSteps · Offline-Vorschau v1.0.5.1
 ZIP entpacken und index.html öffnen.
 
 Die Gestaltung, internen Links, Bilder und PDF-Downloads funktionieren lokal.

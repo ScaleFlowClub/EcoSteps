@@ -73,3 +73,9 @@
 - Leistungseinstiege und 19 visuelle Themenübersichten ergänzt. Originalinhalte bleiben im bisherigen Seitenablauf erreichbar.
 - Energieberatung in Navigation und Seitentiteln verwendet. Meta-Beschreibungen, Canonicals, Organisationsdaten und Live-Sitemap ergänzt. SEO-Regeln für Folgeänderungen im Projekt dokumentiert.
 - Offline-ZIP sowie Desktop und Mobilansicht geprüft. Live-Metadaten mit der konfigurierten Domain abgeglichen.
+
+## Designversion 1.0.5.1
+
+- Helle Flächen mit Himmelblau, Weiß und tiefem Blau nach der Designvorlage.
+- Startseitenbeiträge als kompakte Bildkarten, Textkarten und breitere Beiträge gestaltet. Längere Meldungen sind aufklappbar.
+- Themenübersichten, Formulare und Textflächen an die helle Palette angepasst. SEO-Metadaten und URL-Struktur geprüft.

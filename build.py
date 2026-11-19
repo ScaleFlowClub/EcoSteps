@@ -221,11 +221,15 @@ def homepage():
   <div class="wrap slide-control"><button type="button" data-slide-next aria-label="Nächstes Startseitenbild"><span aria-hidden="true">→</span></button></div>
 </section>"""
     teasers = [localize_legacy(teaser) for teaser in original['teasers']]
-    rows = [(0, 1, 'featured'), (1, 2, 'featured'), (2, 4, 'pair'),
-            (4, 6, 'pair'), (6, 7, 'featured'), (7, 9, 'pair')]
+    for index, label in ((0, 'Hinweise zur Rufnummer und zu aktuellen Themen'),
+                         (1, 'Mehr über die Arbeitsweise von EcoSteps')):
+        teasers[index] = teasers[index].replace(
+            '<div class="fl-callout-text">', f'<details class="story-details"><summary>{label}</summary><div class="fl-callout-text">', 1
+        ).replace('</div><a ', '</div></details><a ', 1)
+    styles = ('story-contact', 'story-feature', 'story-image', 'story-simple',
+              'story-simple', 'story-image', 'story-wide', 'story-simple', 'story-simple')
     original_rows = ''.join(
-        f'<div class="home-original-row {style}">{"".join(teasers[start:end])}</div>'
-        for start, end, style in rows
+        f'<article class="story {style}">{teaser}</article>' for style, teaser in zip(styles, teasers, strict=True)
     )
     features = f"""
 <section class="section wrap discovery" aria-labelledby="start-themes">
@@ -249,6 +253,7 @@ def homepage():
 </section>"""
     return hero + features + f"""
 <section class="section wrap home-original" id="ecosteps-bestand" aria-label="EcoSteps Angebote">
+  <h2>Aktuelles und Angebote</h2>
   <div class="home-original-grid">{original_rows}</div>
   <p class="notice">Preis-, Förder- und Leistungsangaben in den Originalbeiträgen können zeitgebunden sein.</p>
 </section>
