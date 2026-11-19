@@ -28,3 +28,9 @@
 - Impressum anhand des Bestands aufbereitet. Datenschutz und AGB als Freigabeentwürfe ergänzt.
 - Cookie-Demo mit gleichwertigen Optionen, Änderungsmöglichkeit und Speicherung ergänzt. Live-Fassung verwendet keine optionalen Dienste und zeigt keinen automatischen Banner.
 - Build und Integrität des Quellarchivs geprüft.
+
+## 1.0.6
+
+- Dezente Bild- und Kartenanimationen sowie eine Desktop-Parallaxe ergänzt. Reduzierte Bewegung wird berücksichtigt.
+- Offline- und Live-Build geprüft. In Chromium Headless alle 33 Seiten aus dem entpackten ZIP über file:// bei deaktiviertem Netzwerk geöffnet. Lokale Links, Sprungmarken, Bilddateien, Mobilmenü per Tastatur, Beratungsbutton, Formularvalidierung, Termindemo und Cookie-Einstellungen geprüft.
+- Versionsarchiv geprüft und eine separate datierte Quellsicherung erstellt.

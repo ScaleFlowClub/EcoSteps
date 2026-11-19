@@ -27,7 +27,7 @@ def image(name, alt, eager=False):
 
 def card(path, heading, desc, photo=None):
     illustration = image(*photo) if photo else ''
-    return f'<article class="card">{illustration}<div><h3>{link(path, heading)}</h3><p>{desc}</p>{link(path, "Mehr erfahren <span aria-hidden=true>↗</span>", "text-link")}</div></article>'
+    return f'<article class="card">{illustration}<div><h3>{link(path, heading)}</h3><p>{desc}</p>{link(path, "Mehr erfahren <span aria-hidden=true>↗︎</span>", "text-link")}</div></article>'
 
 def intro(title, copy, eyebrow='EcoSteps'):
     return f'<section class="page-intro"><div class="wrap"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{copy}</p></div></section>'
@@ -56,9 +56,10 @@ def layout(path, title, body):
     legal = ''.join(link(k+'/index.html',label) for k,label in [('impressum','Impressum'),('datenschutz','Datenschutz'),('agb','AGB')] if k in paths)
     consultation = 'beratung/index.html' if 'beratung' in paths else 'kontakt/index.html'
     cookies = '<button type="button" data-cookie-settings>Cookie-Einstellungen</button>' if 'datenschutz' in paths else ''
-    floating = link(consultation,cta+' <span aria-hidden="true">↗</span>','fixed-cta') if articles else ''
+    floating = link(consultation,cta+' <span aria-hidden="true">↗︎</span>','fixed-cta') if articles else ''
     cookie_file = 'cookies-live.html' if args.live else 'cookies.html'
     banner = (ROOT / 'content' / cookie_file).read_text() if cookies else ''
+    footer_links = links + link('referenzen/index.html','Referenzen')
     doc = f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)} · EcoSteps</title><link rel="stylesheet" href="@/assets/site.css"><script src="@/assets/site.js" defer></script></head>
@@ -70,20 +71,20 @@ def layout(path, title, body):
 <nav id="navigation" aria-label="Hauptnavigation">{links}</nav><a class="header-phone" href="tel:+4922566209841">{phone}</a>
 </div></header>
 <main id="inhalt" tabindex="-1">{body}</main>
-<footer class="footer"><div class="wrap footer-grid"><div>{link('index.html',image('ecosteps_logo.jpg','EcoSteps – Startseite'),'logo')}<p>ecosteps GmbH &amp; Co. KG<br>Virnicher Str. 8<br>53894 Mechernich</p>{contact()}</div><div><h2>EcoSteps</h2>{links}</div><div><h2>Rechtliches</h2>{legal}{cookies}</div></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>{link('index.html',image('ecosteps_logo.jpg','EcoSteps – Startseite'),'logo')}<p>ecosteps GmbH &amp; Co. KG<br>Virnicher Str. 8<br>53894 Mechernich</p>{contact()}</div><div><h2>EcoSteps</h2>{footer_links}</div><div><h2>Rechtliches</h2>{legal}{cookies}</div></div></footer>
 {floating}{banner}
 </body></html>'''
     file.parent.mkdir(parents=True, exist_ok=True)
     file.write_text(doc.replace('@/',prefix),encoding='utf-8')
 
 def homepage():
-    hero = f'''<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">Photovoltaik · Speicher · Energieberatung</p><h1>Solarstrom.<br><em>Für Ihren Alltag.</em></h1><p>Wir planen Photovoltaik für Privathaushalte und Unternehmen. Nutzen Sie mehr eigenen Strom, senken Sie Ihre Energiekosten und beziehen Sie weniger aus dem Netz.</p>{link('beratung/index.html',cta+' <span aria-hidden="true">↗</span>','button primary')}</div><figure class="hero-media">{image('ecosteps_640x385-teaser_home-gewerbe.jpg','Photovoltaikmodule auf den Dächern eines Gewerbegebäudes',True)}</figure></div></section>
+    hero = f'''<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">Photovoltaik · Speicher · Energieberatung</p><h1>Solarstrom.<br><em>Für Ihren Alltag.</em></h1><p>Wir planen Photovoltaik für Privathaushalte und Unternehmen. Nutzen Sie mehr eigenen Strom, senken Sie Ihre Energiekosten und beziehen Sie weniger aus dem Netz.</p>{link('beratung/index.html',cta+' <span aria-hidden="true">↗︎</span>','button primary')}</div><figure class="hero-media">{image('ecosteps_640x385-teaser_home-gewerbe.jpg','Photovoltaikmodule auf den Dächern eines Gewerbegebäudes',True)}</figure></div></section>
 <section class="proof"><div class="wrap"><span><strong>Seit 2005</strong> im Solarmarkt</span><span><strong>Produktneutral</strong> beraten</span><span><strong>Individuell</strong> geplant</span></div></section>'''
     services = ''.join([card('photovoltaik/eigenverbrauch/index.html','Photovoltaik','Solarstrom erzeugen und passend zum eigenen Verbrauch nutzen.'),card('speicher/eigenverbrauch/index.html','Stromspeicher','Tagsüber erzeugten Solarstrom für später speichern.'),card('service/index.html','Anlagenservice','Erträge im Blick behalten und bestehende Technik weiterentwickeln.')])
     audience = ''.join([card('photovoltaik/eigenverbrauch/index.html','Für Privathaushalte','Planen Sie Solarstrom für Ihr Zuhause.',('ecosteps_640x385-teaser_home-4.jpg','Zwei Menschen genießen die Sonne')),card('gewerbekunden/eigenverbrauch/index.html','Für Unternehmen','Richten Sie die Anlage an Betriebszeiten und Verbrauch aus.',('ecosteps_640x385-teaser_home-gewerbe.jpg','Solarmodule auf Gewerbedächern'))])
-    guide = f'<section class="highlight"><div class="wrap"><p class="eyebrow">Energieratgeber</p><h2>Wie viel Solarstrom können Sie selbst nutzen?</h2><p>Erfahren Sie, wie Eigenverbrauch, Speicher und Anlagengröße zusammenspielen.</p>{link("energieratgeber/index.html","Zum Energieratgeber ↗","button primary")}</div></section>' if articles else ''
+    guide = f'<section class="highlight"><div class="wrap"><p class="eyebrow">Energieratgeber</p><h2>Wie viel Solarstrom können Sie selbst nutzen?</h2><p>Erfahren Sie, wie Eigenverbrauch, Speicher und Anlagengröße zusammenspielen.</p>{link("energieratgeber/index.html","Zum Energieratgeber ↗︎","button primary")}</div></section>' if articles else ''
     references = card('referenzen/index.html','PV-Anlage auf einer Kfz-Werkstatt','Das Bestandsbeispiel zeigt 54,2 kWp Anlagenleistung und einen solaren Deckungsanteil von 60,7 %.',('werkstatt.jpg','Arbeit in einer Kfz-Werkstatt, Motiv der Bestandsseite'))
-    return hero+f'<section class="section wrap"><p class="eyebrow">Unsere Leistungen</p><h2>Technik, die zu Ihrem Verbrauch passt.</h2><div class="cards">{services}</div></section><section class="section light"><div class="wrap"><h2>Solarstrom für Zuhause und Betrieb</h2><div class="cards two">{audience}</div></div></section>'+guide+f'<section class="section wrap"><p class="eyebrow">Erfahrung mit Photovoltaik</p><h2>Fast 1.000 Anlagen von 2008 bis 2015</h2><div class="cards two">{references}</div><p class="archive-link">{link("bestand/startseite/index.html","Meldungen und Angebote der bisherigen Startseite ↗","text-link")}</p></section>'
+    return hero+f'<section class="section wrap"><p class="eyebrow">Unsere Leistungen</p><h2>Technik, die zu Ihrem Verbrauch passt.</h2><div class="cards">{services}</div></section><section class="section light"><div class="wrap"><h2>Solarstrom für Zuhause und Betrieb</h2><div class="cards two">{audience}</div></div></section>'+guide+f'<section class="section wrap"><p class="eyebrow">Erfahrung mit Photovoltaik</p><h2>Fast 1.000 Anlagen von 2008 bis 2015</h2><div class="cards two">{references}</div><p class="archive-link">{link("bestand/startseite/index.html","Meldungen und Angebote der bisherigen Startseite ↗︎","text-link")}</p></section>'
 
 categories = {'photovoltaik':'Photovoltaik','speicher':'Stromspeicher','heizung':'Heizung','gewerbekunden':'Für Unternehmen','beratung':'Energieberatung'}
 paths = set(pages) | {'leistungen','bestand/startseite','referenzen'}
@@ -100,13 +101,15 @@ for category, label in categories.items():
     if entries:
         sections += f'<h2>{label}</h2><ul>'+''.join(f'<li>{link(k+"/index.html",escape(p["title"].split(" - ")[-1]))}</li>' for k,p in entries)+'</ul>'
 layout('referenzen','Referenzen',intro('Referenzen','Beispiele aus der bisherigen EcoSteps-Website.')+'<section class="section wrap cards two">'+card('gewerbekunden/eigenverbrauch/index.html','Kfz-Werkstatt','Historisches Anlagenbeispiel mit Leistungsprofil und Jahreswerten.',('werkstatt.jpg','Arbeit in einer Kfz-Werkstatt, Motiv der Bestandsseite'))+card('photovoltaik/eigenverbrauch/index.html#4','Kundenanlagen','Historische Beispiele für Eigenverbrauch in Privathaushalten.')+'</section>')
-layout('leistungen','Leistungen',intro('Unsere Leistungen','Photovoltaik, Speicher, Wärme und Anlagenservice.')+f'<section class="section wrap prose">{sections}<h2>Anlagenservice</h2>{link("service/index.html","Zum Anlagenservice ↗","text-link")}</section>')
+layout('leistungen','Leistungen',intro('Unsere Leistungen','Photovoltaik, Speicher, Wärme und Anlagenservice.')+f'<section class="section wrap prose">{sections}<h2>Anlagenservice</h2>{link("service/index.html","Zum Anlagenservice ↗︎","text-link")}</section>')
 for key,p in pages.items():
     if not key: continue
     title = escape(p['title'])
     body = intro(title,'','Bestandsinhalte')+f'<section class="section wrap prose">{legacy(key)}</section>'
     if key.startswith(('photovoltaik/','speicher/','heizung/','gewerbekunden/','beratung/')):
         body = body.replace('<div class="archive">','<p class="notice">Bestandsinhalt. Angaben zu Preisen, Produkten, Vergütung und Förderung können zeitgebunden sein.</p><div class="archive">',1)
+    if key == 'speicher/technik':
+        body = re.sub(r'<h2>([^<]*[Ff]lexibl[^<]*)</h2>', r'<h2 id="5">\1</h2>', body, count=1)
     if key == 'photovoltaik/eigenverbrauch':
         video = '<p class="notice"><a href="https://www.youtube.com/watch?v=w3wNNmuIyEM">EcoSteps-Video zu Photovoltaik, Speicher und Heizung ansehen</a> (YouTube, Internetverbindung erforderlich).</p>'
         body = body.replace('<p></p>', video, 1)
@@ -137,6 +140,8 @@ for key,p in source['pages'].items():
         target = 'index.html + bestand/startseite/index.html'
     if key == 'beratung':
         status = 'Beratungseinstieg neu; Original unter beratung/beratungsqualität/index.html'
+    if key in ('datenschutz','agb','referenzen') and key not in pages:
+        status += '; neue Zielseite erstellt'
     if key == 'kontakt':
         status = 'Kontaktwege übernommen; Kartenadresse abweichend, Karte ausgelassen'
     rows.append(f"{p['url']}\t{target}\t{status}")
